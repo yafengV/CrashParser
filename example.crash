@@ -1,0 +1,134 @@
+Incident Identifier: 1234ABCD-5678-90EF-GHIJ-KLMNOPQRSTUV
+CrashReporter Key:   1234567890abcdef1234567890abcdef12345678
+Hardware Model:      iPhone12,1
+Process:             MyApp [1234]
+Path:                /private/var/containers/Bundle/Application/12345678-90AB-CDEF-1234-567890ABCDEF/MyApp.app/MyApp
+Identifier:          com.example.MyApp
+Version:             1.0 (1)
+Code Type:           ARM-64 (Native)
+Role:                Foreground
+Parent Process:      launchd [1]
+Coalition:           com.example.MyApp [1234]
+
+Date/Time:           2023-05-01 12:34:56.789 +0800
+Launch Time:         2023-05-01 12:30:00.000 +0800
+OS Version:          iOS 15.4 (19E240)
+Release Type:        User
+Baseband Version:    2.02.00
+Report Version:      104
+
+Exception Type:  EXC_CRASH (SIGABRT)
+Exception Codes: 0x0000000000000000, 0x0000000000000000
+Exception Note:  EXC_CORPSE_NOTIFY
+Triggered by Thread:  0
+
+Application Specific Information:
+abort() called
+
+Last Exception Backtrace:
+0   CoreFoundation                	0x00000001abcdef12 __exceptionPreprocess + 176
+1   libobjc.A.dylib               	0x00000001abcdef34 objc_exception_throw + 56
+2   CoreFoundation                	0x00000001abcdef56 -[NSObject(NSObject) doesNotRecognizeSelector:] + 132
+3   CoreFoundation                	0x00000001abcdef78 ___forwarding___ + 1432
+4   CoreFoundation                	0x00000001abcdef9a _CF_forwarding_prep_0 + 96
+5   MyApp                         	0x0000000100001234 -[MyViewController viewDidLoad] + 123
+6   UIKitCore                     	0x00000001abcdefbc -[UIViewController loadViewIfRequired] + 1084
+7   UIKitCore                     	0x00000001abcdefde -[UIViewController view] + 28
+8   UIKitCore                     	0x00000001abcdeff0 -[UIWindow addRootViewControllerViewIfPossible] + 176
+9   UIKitCore                     	0x00000001abcdf012 -[UIWindow _setHidden:forced:] + 292
+10  UIKitCore                     	0x00000001abcdf034 -[UIWindow makeKeyAndVisible] + 52
+11  UIKitCore                     	0x00000001abcdf056 -[UIApplication _callInitializationDelegatesForMainScene:transitionContext:] + 3600
+12  UIKitCore                     	0x00000001abcdf078 -[UIApplication _runWithMainScene:transitionContext:completion:] + 1244
+13  UIKitCore                     	0x00000001abcdf09a -[UIApplication workspaceDidEndTransaction:] + 188
+14  FrontBoardServices            	0x00000001abcdf0bc __FBSSERIALQUEUE_IS_CALLING_OUT_TO_A_BLOCK__ + 40
+15  FrontBoardServices            	0x00000001abcdf0de -[FBSSerialQueue _performNext] + 404
+16  FrontBoardServices            	0x00000001abcdf100 -[FBSSerialQueue _performNextFromRunLoopSource] + 56
+17  CoreFoundation                	0x00000001abcdf122 __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 28
+18  CoreFoundation                	0x00000001abcdf144 __CFRunLoopDoSource0 + 208
+19  CoreFoundation                	0x00000001abcdf166 __CFRunLoopDoSources0 + 268
+20  CoreFoundation                	0x00000001abcdf188 __CFRunLoopRun + 824
+21  CoreFoundation                	0x00000001abcdf1aa CFRunLoopRunSpecific + 600
+22  GraphicsServices              	0x00000001abcdf1cc GSEventRunModal + 164
+23  UIKitCore                     	0x00000001abcdf1ee -[UIApplication _run] + 1072
+24  UIKitCore                     	0x00000001abcdf210 UIApplicationMain + 168
+25  MyApp                         	0x0000000100002345 main + 56
+26  dyld                          	0x00000001abcdf232 start + 4
+
+Thread 0 name:  Dispatch queue: com.apple.main-thread
+Thread 0 Crashed:
+0   libsystem_kernel.dylib        	0x00000001abcdf254 __pthread_kill + 8
+1   libsystem_pthread.dylib       	0x00000001abcdf276 pthread_kill + 268
+2   libsystem_c.dylib             	0x00000001abcdf298 abort + 140
+3   libc++abi.dylib               	0x00000001abcdf2ba __cxa_bad_cast + 0
+4   libc++abi.dylib               	0x00000001abcdf2dc __cxa_bad_cast + 0
+5   libobjc.A.dylib               	0x00000001abcdf2fe objc_exception_throw + 56
+6   CoreFoundation                	0x00000001abcdf320 -[NSObject(NSObject) doesNotRecognizeSelector:] + 132
+7   CoreFoundation                	0x00000001abcdf342 ___forwarding___ + 1432
+8   CoreFoundation                	0x00000001abcdf364 _CF_forwarding_prep_0 + 96
+9   MyApp                         	0x0000000100001234 -[MyViewController viewDidLoad] + 123
+10  UIKitCore                     	0x00000001abcdf386 -[UIViewController loadViewIfRequired] + 1084
+11  UIKitCore                     	0x00000001abcdf3a8 -[UIViewController view] + 28
+12  UIKitCore                     	0x00000001abcdf3ca -[UIWindow addRootViewControllerViewIfPossible] + 176
+13  UIKitCore                     	0x00000001abcdf3ec -[UIWindow _setHidden:forced:] + 292
+14  UIKitCore                     	0x00000001abcdf40e -[UIWindow makeKeyAndVisible] + 52
+15  UIKitCore                     	0x00000001abcdf430 -[UIApplication _callInitializationDelegatesForMainScene:transitionContext:] + 3600
+16  UIKitCore                     	0x00000001abcdf452 -[UIApplication _runWithMainScene:transitionContext:completion:] + 1244
+17  UIKitCore                     	0x00000001abcdf474 -[UIApplication workspaceDidEndTransaction:] + 188
+18  FrontBoardServices            	0x00000001abcdf496 __FBSSERIALQUEUE_IS_CALLING_OUT_TO_A_BLOCK__ + 40
+19  FrontBoardServices            	0x00000001abcdf4b8 -[FBSSerialQueue _performNext] + 404
+20  FrontBoardServices            	0x00000001abcdf4da -[FBSSerialQueue _performNextFromRunLoopSource] + 56
+21  CoreFoundation                	0x00000001abcdf4fc __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 28
+22  CoreFoundation                	0x00000001abcdf51e __CFRunLoopDoSource0 + 208
+23  CoreFoundation                	0x00000001abcdf540 __CFRunLoopDoSources0 + 268
+24  CoreFoundation                	0x00000001abcdf562 __CFRunLoopRun + 824
+25  CoreFoundation                	0x00000001abcdf584 CFRunLoopRunSpecific + 600
+26  GraphicsServices              	0x00000001abcdf5a6 GSEventRunModal + 164
+27  UIKitCore                     	0x00000001abcdf5c8 -[UIApplication _run] + 1072
+28  UIKitCore                     	0x00000001abcdf5ea UIApplicationMain + 168
+29  MyApp                         	0x0000000100002345 main + 56
+30  dyld                          	0x00000001abcdf60c start + 4
+
+Thread 1:
+0   libsystem_pthread.dylib       	0x00000001abcdf62e start_wqthread + 0
+
+Thread 2:
+0   libsystem_pthread.dylib       	0x00000001abcdf62e start_wqthread + 0
+
+Thread 3 name:  com.apple.uikit.eventfetch-thread
+Thread 3:
+0   libsystem_kernel.dylib        	0x00000001abcdf650 mach_msg_trap + 8
+1   libsystem_kernel.dylib        	0x00000001abcdf672 mach_msg + 76
+2   CoreFoundation                	0x00000001abcdf694 __CFRunLoopServiceMachPort + 372
+3   CoreFoundation                	0x00000001abcdf6b6 __CFRunLoopRun + 1180
+4   CoreFoundation                	0x00000001abcdf6d8 CFRunLoopRunSpecific + 600
+5   Foundation                    	0x00000001abcdf6fa -[NSRunLoop(NSRunLoop) runMode:beforeDate:] + 212
+6   Foundation                    	0x00000001abcdf71c -[NSRunLoop(NSRunLoop) runUntilDate:] + 64
+7   UIKitCore                     	0x00000001abcdf73e -[UIEventFetcher threadMain] + 524
+8   Foundation                    	0x00000001abcdf760 __NSThread__start__ + 808
+9   libsystem_pthread.dylib       	0x00000001abcdf782 _pthread_start + 148
+10  libsystem_pthread.dylib       	0x00000001abcdf7a4 thread_start + 8
+
+Thread 0 crashed with ARM Thread State (64-bit):
+    x0: 0x0000000000000000   x1: 0x0000000000000000   x2: 0x0000000000000000   x3: 0x0000000000000000
+    x4: 0x0000000000000000   x5: 0x0000000000000000   x6: 0x0000000000000000   x7: 0x0000000000000000
+    x8: 0x0000000000000000   x9: 0x0000000000000000  x10: 0x0000000000000000  x11: 0x0000000000000000
+   x12: 0x0000000000000000  x13: 0x0000000000000000  x14: 0x0000000000000000  x15: 0x0000000000000000
+   x16: 0x0000000000000000  x17: 0x0000000000000000  x18: 0x0000000000000000  x19: 0x0000000000000000
+   x20: 0x0000000000000000  x21: 0x0000000000000000  x22: 0x0000000000000000  x23: 0x0000000000000000
+   x24: 0x0000000000000000  x25: 0x0000000000000000  x26: 0x0000000000000000  x27: 0x0000000000000000
+   x28: 0x0000000000000000   fp: 0x000000016fdff3e0   lr: 0x00000001abcdf276
+    sp: 0x000000016fdff3c0   pc: 0x00000001abcdf254 cpsr: 0x00000000
+
+Binary Images:
+0x0000000100000000 - 0x000000010001ffff MyApp arm64  <abcdef1234567890abcdef1234567890> /var/containers/Bundle/Application/12345678-90AB-CDEF-1234-567890ABCDEF/MyApp.app/MyApp
+0x00000001abcd0000 - 0x00000001abcfffff dyld arm64  <1234567890abcdef1234567890abcdef> /usr/lib/dyld
+0x00000001abce0000 - 0x00000001abceffff libsystem_kernel.dylib arm64  <2345678901abcdef2345678901abcdef> /usr/lib/system/libsystem_kernel.dylib
+0x00000001abcf0000 - 0x00000001abcfffff libsystem_pthread.dylib arm64  <3456789012abcdef3456789012abcdef> /usr/lib/system/libsystem_pthread.dylib
+0x00000001abd00000 - 0x00000001abd0ffff libsystem_c.dylib arm64  <4567890123abcdef4567890123abcdef> /usr/lib/system/libsystem_c.dylib
+0x00000001abd10000 - 0x00000001abd1ffff libc++abi.dylib arm64  <5678901234abcdef5678901234abcdef> /usr/lib/libc++abi.dylib
+0x00000001abd20000 - 0x00000001abd2ffff libobjc.A.dylib arm64  <6789012345abcdef6789012345abcdef> /usr/lib/libobjc.A.dylib
+0x00000001abd30000 - 0x00000001abd3ffff CoreFoundation arm64  <7890123456abcdef7890123456abcdef> /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+0x00000001abd40000 - 0x00000001abd4ffff UIKitCore arm64  <8901234567abcdef8901234567abcdef> /System/Library/Frameworks/UIKit.framework/UIKitCore
+0x00000001abd50000 - 0x00000001abd5ffff FrontBoardServices arm64  <9012345678abcdef9012345678abcdef> /System/Library/PrivateFrameworks/FrontBoardServices.framework/FrontBoardServices
+0x00000001abd60000 - 0x00000001abd6ffff GraphicsServices arm64  <0123456789abcdef0123456789abcdef> /System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices
+0x00000001abd70000 - 0x00000001abd7ffff Foundation arm64  <1234567890abcdef1234567890abcdef> /System/Library/Frameworks/Foundation.framework/Foundation 

@@ -1,0 +1,4 @@
+PyQt5==5.15.9
+pyobjc==8.5
+pyobjc-framework-Cocoa==8.5
+pyobjc-framework-Quartz==8.5 
