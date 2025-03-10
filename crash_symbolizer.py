@@ -8,6 +8,8 @@ import tempfile
 import shutil
 import plistlib
 from pathlib import Path
+import json
+from datetime import datetime
 
 
 class CrashSymbolizer:
@@ -23,6 +25,13 @@ class CrashSymbolizer:
         self.binary_images = []
         self.thread_backtraces = []
         self.crash_info = {}
+        self.app_name = None
+        self.app_path = None
+        self.crash_threads = []
+        self.crash_reason = None
+        self.device_info = {}
+        self.process_info = {}
+        self.symbol_cache = {}  # 添加符号缓存
         
     def load_archive(self, archive_path):
         """
@@ -113,6 +122,67 @@ class CrashSymbolizer:
         except subprocess.CalledProcessError as e:
             raise Exception(f"获取UUID失败: {str(e)}")
             
+        # 在加载完成后验证 UUID
+        self.verify_dsym_uuid()
+        
+        # 预热符号缓存
+        print("正在预热符号缓存...")
+        self._warm_up_symbol_cache()
+        
+    def verify_dsym_uuid(self):
+        """验证 dSYM 文件的 UUID 是否与应用匹配"""
+        if not self.binary_path or not self.dsym_path:
+            raise ValueError("二进制文件或dSYM文件路径未设置")
+        
+        # 获取二进制文件的 UUID
+        binary_uuid_cmd = ["dwarfdump", "--uuid", self.binary_path]
+        dsym_uuid_cmd = ["dwarfdump", "--uuid", self.dsym_path]
+        
+        try:
+            binary_result = subprocess.run(binary_uuid_cmd, capture_output=True, text=True, check=True)
+            dsym_result = subprocess.run(dsym_uuid_cmd, capture_output=True, text=True, check=True)
+            
+            binary_uuid = re.search(r'UUID: ([0-9A-F-]+)', binary_result.stdout)
+            dsym_uuid = re.search(r'UUID: ([0-9A-F-]+)', dsym_result.stdout)
+            
+            if not binary_uuid or not dsym_uuid:
+                raise ValueError("无法获取UUID")
+            
+            binary_uuid = binary_uuid.group(1).lower()
+            dsym_uuid = dsym_uuid.group(1).lower()
+            
+            if binary_uuid != dsym_uuid:
+                raise ValueError(f"UUID不匹配: 二进制文件({binary_uuid}) != dSYM文件({dsym_uuid})")
+            
+            self.binary_uuid = binary_uuid
+            return True
+            
+        except subprocess.CalledProcessError as e:
+            raise Exception(f"验证UUID失败: {str(e)}")
+
+    def _warm_up_symbol_cache(self):
+        """预热符号缓存，提前加载常用符号"""
+        if not self.binary_path or not self.dsym_path:
+            return
+        
+        try:
+            # 使用 nm 命令获取所有符号
+            nm_cmd = ["nm", "-arch", "arm64", self.binary_path]
+            result = subprocess.run(nm_cmd, capture_output=True, text=True)
+            
+            # 解析并缓存关键符号
+            for line in result.stdout.splitlines():
+                if " t " in line or " T " in line:  # 只缓存文本段的符号
+                    parts = line.split(" ")
+                    if len(parts) >= 3:
+                        address = parts[0]
+                        symbol = parts[-1]
+                        cache_key = f"{address}_arm64_0x0"
+                        self.symbol_cache[cache_key] = symbol
+                        
+        except Exception as e:
+            print(f"预热符号缓存时出错: {str(e)}")
+
     def load_crash_file(self, crash_path):
         """
         加载Crash文件
@@ -343,8 +413,70 @@ class CrashSymbolizer:
         frame_count = 0
         symbolicated_count = 0
         
+        # 首先收集所有需要符号化的地址
+        addresses_to_symbolicate = {}
         for line in self.crash_lines:
-            # 检查是否是堆栈帧行
+            frame_match = re.search(r'^(\d+)\s+(\S+)\s+(0x[0-9a-f]+)\s+(.+)$', line.strip())
+            if frame_match and (frame_match.group(2) == self.binary_name or self.binary_name in frame_match.group(2)):
+                address = frame_match.group(3)
+                if address not in self.symbol_cache:
+                    addresses_to_symbolicate[address] = None
+                    
+        # 批量符号化地址
+        if addresses_to_symbolicate:
+            if progress_signal:
+                progress_signal.emit(f"\n需要符号化 {len(addresses_to_symbolicate)} 个地址...")
+                
+            for arch in architectures:
+                remaining_addresses = [addr for addr, symbol in addresses_to_symbolicate.items() if symbol is None]
+                if not remaining_addresses:
+                    break
+                    
+                if progress_signal:
+                    progress_signal.emit(f"\n尝试使用 {arch} 架构:")
+                    
+                # 使用dSYM文件批量符号化
+                try:
+                    if progress_signal:
+                        progress_signal.emit("  使用dSYM文件批量符号化...")
+                        
+                    cmd = ["atos", "-arch", arch, "-o", self.dsym_path, "-l", app_load_address] + remaining_addresses
+                    result = subprocess.run(cmd, capture_output=True, text=True)
+                    
+                    if result.returncode == 0:
+                        symbols = result.stdout.strip().split("\n")
+                        for addr, symbol in zip(remaining_addresses, symbols):
+                            if symbol and symbol != "??" and addr not in symbol:
+                                addresses_to_symbolicate[addr] = symbol
+                                self.symbol_cache[addr] = symbol
+                                
+                except Exception as e:
+                    if progress_signal:
+                        progress_signal.emit(f"  ✗ dSYM批量符号化失败: {str(e)}")
+                        
+                # 对未成功的地址使用二进制文件尝试符号化
+                remaining_addresses = [addr for addr, symbol in addresses_to_symbolicate.items() if symbol is None]
+                if remaining_addresses:
+                    try:
+                        if progress_signal:
+                            progress_signal.emit("  使用二进制文件批量符号化...")
+                            
+                        cmd = ["atos", "-arch", arch, "-o", self.binary_path, "-l", app_load_address] + remaining_addresses
+                        result = subprocess.run(cmd, capture_output=True, text=True)
+                        
+                        if result.returncode == 0:
+                            symbols = result.stdout.strip().split("\n")
+                            for addr, symbol in zip(remaining_addresses, symbols):
+                                if symbol and symbol != "??" and addr not in symbol:
+                                    addresses_to_symbolicate[addr] = symbol
+                                    self.symbol_cache[addr] = symbol
+                                    
+                    except Exception as e:
+                        if progress_signal:
+                            progress_signal.emit(f"  ✗ 二进制文件批量符号化失败: {str(e)}")
+                            
+        # 使用符号化结果生成输出
+        for line in self.crash_lines:
             frame_match = re.search(r'^(\d+)\s+(\S+)\s+(0x[0-9a-f]+)\s+(.+)$', line.strip())
             if frame_match:
                 frame_count += 1
@@ -353,93 +485,14 @@ class CrashSymbolizer:
                 address = frame_match.group(3)
                 original_symbol = frame_match.group(4)
                 
-                # 只对应用自身的符号进行符号化
                 if binary_name == self.binary_name or self.binary_name in binary_name:
-                    if progress_signal:
-                        progress_signal.emit(f"\n符号化第 {frame_index} 帧:")
-                        progress_signal.emit(f"  原始行: {line.strip()}")
-                    
-                    try:
-                        symbolicated_symbol = None
-                        
-                        for arch in architectures:
-                            if progress_signal:
-                                progress_signal.emit(f"  尝试 {arch} 架构:")
-                            
-                            # 首先尝试使用 dSYM 文件
-                            try:
-                                if progress_signal:
-                                    progress_signal.emit(f"    使用dSYM文件...")
-                                result = subprocess.run(
-                                    [
-                                        "atos",
-                                        "-arch", arch,
-                                        "-o", self.dsym_path,
-                                        "-l", app_load_address,
-                                        address
-                                    ],
-                                    capture_output=True,
-                                    text=True,
-                                    check=True
-                                )
-                                
-                                symbol = result.stdout.strip()
-                                if symbol and symbol != "??" and address not in symbol:
-                                    symbolicated_symbol = symbol
-                                    if progress_signal:
-                                        progress_signal.emit(f"    ✓ 成功: {symbol}")
-                                    break
-                                elif progress_signal:
-                                    progress_signal.emit(f"    ⚠️ 未找到符号")
-                                    
-                            except subprocess.CalledProcessError as e:
-                                if progress_signal:
-                                    progress_signal.emit(f"    ✗ 失败: {str(e)}")
-                                
-                            # 如果 dSYM 失败，尝试使用二进制文件
-                            if not symbolicated_symbol:
-                                try:
-                                    if progress_signal:
-                                        progress_signal.emit(f"    使用二进制文件...")
-                                    result = subprocess.run(
-                                        [
-                                            "atos",
-                                            "-arch", arch,
-                                            "-o", self.binary_path,
-                                            "-l", app_load_address,
-                                            address
-                                        ],
-                                        capture_output=True,
-                                        text=True,
-                                        check=True
-                                    )
-                                    
-                                    symbol = result.stdout.strip()
-                                    if symbol and symbol != "??" and address not in symbol:
-                                        symbolicated_symbol = symbol
-                                        if progress_signal:
-                                            progress_signal.emit(f"    ✓ 成功: {symbol}")
-                                        break
-                                    elif progress_signal:
-                                        progress_signal.emit(f"    ⚠️ 未找到符号")
-                                        
-                                except subprocess.CalledProcessError as e:
-                                    if progress_signal:
-                                        progress_signal.emit(f"    ✗ 失败: {str(e)}")
-                                    
-                        # 如果成功获取到符号，替换原始行
-                        if symbolicated_symbol:
-                            symbolicated_count += 1
-                            line = f"{frame_index} {binary_name} {address} {symbolicated_symbol}"
-                            if progress_signal:
-                                progress_signal.emit(f"  ✓ 符号化结果: {line}")
-                        elif progress_signal:
-                            progress_signal.emit(f"  ✗ 符号化失败，保留原始行")
-                            
-                    except Exception as e:
+                    # 使用缓存的符号
+                    if address in self.symbol_cache:
+                        symbolicated_count += 1
+                        line = f"{frame_index} {binary_name} {address} {self.symbol_cache[address]}"
                         if progress_signal:
-                            progress_signal.emit(f"  ✗ 符号化过程出错: {str(e)}")
-                        
+                            progress_signal.emit(f"✓ 帧 {frame_index} 已符号化")
+                            
             symbolicated_lines.append(line)
             
         if progress_signal:
@@ -476,3 +529,433 @@ class CrashSymbolizer:
             dict: Crash基本信息
         """
         return self.crash_info 
+
+    def load_metrickit_json(self, json_path):
+        """加载并解析MetricKit JSON文件"""
+        try:
+            with open(json_path, 'r', encoding='utf-8') as f:
+                json_data = json.load(f)
+            return json_data
+        except json.JSONDecodeError as e:
+            raise Exception(f"JSON格式错误: {str(e)}")
+        except Exception as e:
+            raise Exception(f"无法读取JSON文件: {str(e)}")
+            
+    def parse_metrickit_crash(self, json_data):
+        """解析MetricKit JSON中的崩溃信息"""
+        try:
+            print("\n开始解析MetricKit JSON...")
+            
+            # 验证JSON数据结构
+            if isinstance(json_data, list):
+                print("JSON数据是数组格式，使用第一个元素")
+                if not json_data:
+                    raise Exception("JSON数组为空")
+                json_data = json_data[0]
+                
+            if not isinstance(json_data, dict):
+                raise Exception(f"JSON数据格式错误，当前类型: {type(json_data)}")
+                
+            # 尝试不同的路径查找崩溃诊断数据
+            crash_diagnostic = None
+            possible_paths = [
+                'crashDiagnostics',
+                'diagnostics',
+                'payload',
+                'diagnosticPayload'
+            ]
+            
+            for path in possible_paths:
+                data = json_data.get(path)
+                if isinstance(data, list) and data:
+                    print(f"在路径 '{path}' 找到诊断数据")
+                    crash_diagnostic = data[0]
+                    break
+                elif isinstance(data, dict):
+                    print(f"在路径 '{path}' 找到诊断数据")
+                    crash_diagnostic = data
+                    break
+                    
+            if not crash_diagnostic:
+                raise Exception("未找到有效的崩溃诊断数据")
+                
+            # 解析调用栈
+            call_stack_tree = None
+            call_stack_paths = [
+                'callStackTree',
+                'callStacks',
+                'stackFrames',
+                'frames'
+            ]
+            
+            for path in call_stack_paths:
+                data = crash_diagnostic.get(path)
+                if data:
+                    print(f"在路径 '{path}' 找到调用栈数据")
+                    call_stack_tree = data
+                    break
+                    
+            if not call_stack_tree:
+                raise Exception("未找到有效的调用栈数据")
+                
+            # 获取元数据
+            meta_data = {}
+            meta_data_paths = [
+                'diagnosticMetaData',
+                'metaData',
+                'metadata'
+            ]
+            
+            for path in meta_data_paths:
+                data = crash_diagnostic.get(path)
+                if isinstance(data, dict):
+                    print(f"在路径 '{path}' 找到元数据")
+                    meta_data.update(data)
+                    
+            # 解析设备信息
+            self.device_info = {
+                'model': meta_data.get('deviceType') or meta_data.get('model') or 'Unknown',
+                'os_version': meta_data.get('osVersion') or meta_data.get('systemVersion') or 'Unknown',
+                'timestamp': meta_data.get('timestamp') or datetime.now().isoformat()
+            }
+            
+            # 解析应用信息
+            self.process_info = {
+                'name': meta_data.get('bundleIdentifier') or meta_data.get('appBundleId') or 'Unknown',
+                'version': meta_data.get('appVersion') or meta_data.get('version') or 'Unknown',
+                'build': meta_data.get('appBuildVersion') or meta_data.get('build') or 'Unknown'
+            }
+            
+            # 解析崩溃原因
+            exception_type = meta_data.get('exceptionType') or meta_data.get('type') or 'Unknown'
+            exception_code = meta_data.get('exceptionCode') or meta_data.get('code') or 'Unknown'
+            signal = meta_data.get('signal') or meta_data.get('signalType') or 'Unknown'
+            
+            self.crash_reason = f"Exception Type: {exception_type}, Exception Code: {exception_code}, Signal: {signal}"
+            
+            # 解析二进制镜像和线程信息
+            self.binary_images = []
+            self.crash_threads = []
+            processed_binaries = set()
+            
+            def process_frames(frames, thread_frames, depth=0):
+                if not isinstance(frames, list):
+                    if isinstance(frames, dict):
+                        frames = [frames]
+                    else:
+                        return
+                        
+                for frame in frames:
+                    if not isinstance(frame, dict):
+                        continue
+                        
+                    # 提取二进制信息
+                    binary_info = {}
+                    for key in ['binaryName', 'libraryName', 'imageName']:
+                        if key in frame:
+                            binary_info['name'] = frame[key]
+                            break
+                            
+                    for key in ['binaryUUID', 'uuid', 'imageUUID']:
+                        if key in frame:
+                            binary_info['uuid'] = frame[key]
+                            break
+                            
+                    if binary_info.get('name') and binary_info.get('uuid'):
+                        binary_key = (binary_info['name'], binary_info['uuid'])
+                        if binary_key not in processed_binaries:
+                            processed_binaries.add(binary_key)
+                            
+                            # 计算基地址
+                            address = int(frame.get('address', '0'), 16) if isinstance(frame.get('address'), str) else frame.get('address', 0)
+                            offset = int(frame.get('offsetIntoBinaryTextSegment', '0'), 16) if isinstance(frame.get('offsetIntoBinaryTextSegment'), str) else frame.get('offsetIntoBinaryTextSegment', 0)
+                            
+                            base_address = address - offset if offset else address
+                            
+                            self.binary_images.append({
+                                'name': binary_info['name'],
+                                'uuid': binary_info['uuid'],
+                                'arch': meta_data.get('platformArchitecture', 'arm64'),
+                                'base': base_address,
+                                'size': frame.get('size', 0)
+                            })
+                            
+                    # 创建调用帧
+                    frame_info = {
+                        'binary': binary_info.get('name', 'Unknown'),
+                        'address': frame.get('address', '0x0'),
+                        'offset': frame.get('offsetIntoBinaryTextSegment', '0x0'),
+                        'symbol': frame.get('symbolName', '') or frame.get('symbol', ''),
+                        'depth': depth
+                    }
+                    
+                    # 确保地址格式正确
+                    if isinstance(frame_info['address'], int):
+                        frame_info['address'] = hex(frame_info['address'])
+                    if isinstance(frame_info['offset'], int):
+                        frame_info['offset'] = hex(frame_info['offset'])
+                        
+                    thread_frames.append(frame_info)
+                    
+                    # 处理子帧
+                    for subframes_key in ['subFrames', 'frames', 'children']:
+                        if subframes_key in frame:
+                            process_frames(frame[subframes_key], thread_frames, depth + 1)
+                            
+            # 处理调用栈
+            if isinstance(call_stack_tree, dict):
+                call_stacks = call_stack_tree.get('callStacks', [call_stack_tree])
+            else:
+                call_stacks = call_stack_tree if isinstance(call_stack_tree, list) else [call_stack_tree]
+                
+            for stack_index, call_stack in enumerate(call_stacks):
+                thread_frames = []
+                
+                if isinstance(call_stack, dict):
+                    root_frames = call_stack.get('callStackRootFrames') or call_stack.get('frames') or []
+                    is_crashed = call_stack.get('threadAttributed', False) or call_stack.get('crashed', False)
+                else:
+                    root_frames = call_stack if isinstance(call_stack, list) else []
+                    is_crashed = stack_index == 0  # 假设第一个线程是崩溃线程
+                    
+                process_frames(root_frames, thread_frames)
+                
+                if thread_frames:
+                    self.crash_threads.append({
+                        'number': stack_index,
+                        'crashed': is_crashed,
+                        'frames': thread_frames
+                    })
+                    
+            if not self.crash_threads:
+                raise Exception("未能解析出有效的调用帧")
+                
+            print(f"\n解析完成:")
+            print(f"- 设备: {self.device_info['model']} ({self.device_info['os_version']})")
+            print(f"- 应用: {self.process_info['name']} ({self.process_info['version']} [{self.process_info['build']}])")
+            print(f"- 二进制镜像数: {len(self.binary_images)}")
+            print(f"- 线程数: {len(self.crash_threads)}")
+            
+        except Exception as e:
+            raise Exception(f"解析MetricKit JSON失败: {str(e)}")
+            
+    def symbolize_metrickit(self, progress_callback=None):
+        """符号化MetricKit崩溃信息"""
+        try:
+            print("\n开始符号化MetricKit崩溃信息...")
+            
+            output_lines = []
+            output_lines.append("崩溃报告\n")
+            output_lines.append(f"设备: {self.device_info['model']} ({self.device_info['os_version']})")
+            output_lines.append(f"时间: {self.device_info['timestamp']}")
+            output_lines.append(f"进程: {self.process_info['name']} ({self.process_info['version']} [{self.process_info['build']}])")
+            output_lines.append(f"原因: {self.crash_reason}\n")
+            
+            # 验证必要的文件和路径
+            if not self.binary_path or not os.path.exists(self.binary_path):
+                raise Exception(f"找不到二进制文件: {self.binary_path}")
+            if not self.dsym_path or not os.path.exists(self.dsym_path):
+                raise Exception(f"找不到dSYM文件: {self.dsym_path}")
+            
+            print(f"二进制文件: {self.binary_path}")
+            print(f"dSYM文件: {self.dsym_path}")
+            
+            # 获取支持的架构
+            try:
+                lipo_result = subprocess.run(
+                    ["lipo", "-info", self.binary_path],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+                architectures = []
+                if "Non-fat file" in lipo_result.stdout:
+                    arch = lipo_result.stdout.split("architecture: ")[1].strip()
+                    architectures = [arch]
+                else:
+                    archs = lipo_result.stdout.split("are: ")[1].strip()
+                    architectures = archs.split(" ")
+                print(f"支持的架构: {', '.join(architectures)}")
+            except Exception as e:
+                print(f"警告: 无法获取架构信息 - {str(e)}")
+                architectures = ['arm64']
+            
+            # 符号化每个线程
+            for thread in self.crash_threads:
+                thread_header = f"\n{'崩溃' if thread['crashed'] else ''}线程 {thread['number']} 回溯:"
+                output_lines.append(thread_header)
+                print(thread_header)
+                
+                for i, frame in enumerate(thread['frames']):
+                    # 查找对应的二进制镜像
+                    binary_image = next(
+                        (img for img in self.binary_images if img['name'] == frame['binary']),
+                        None
+                    )
+                    
+                    if not binary_image:
+                        print(f"警告: 找不到二进制镜像 {frame['binary']}")
+                        output_lines.append(f"{i:3d} {frame['binary']} {frame['address']} {frame['symbol'] or '<未知符号>'}")
+                        continue
+                        
+                    try:
+                        # 确保地址格式正确
+                        if isinstance(frame['address'], str):
+                            if not frame['address'].startswith('0x'):
+                                frame['address'] = f"0x{frame['address']}"
+                        else:
+                            frame['address'] = hex(frame['address'])
+                            
+                        # 计算相对地址
+                        frame_address = int(frame['address'], 16)
+                        base_address = binary_image['base']
+                        relative_address = frame_address - base_address
+                        
+                        if progress_callback:
+                            progress_callback.emit(f"正在符号化地址: {frame['address']}...")
+                            
+                        print(f"符号化: {frame['binary']} @ {frame['address']} (base: {hex(base_address)})")
+                        
+                        # 使用缓存
+                        cache_key = f"{hex(relative_address)}_{binary_image['arch']}_{hex(base_address)}"
+                        if cache_key in self.symbol_cache:
+                            symbol = self.symbol_cache[cache_key]
+                            print(f"使用缓存的符号: {symbol}")
+                        else:
+                            # 尝试使用不同的符号化方法
+                            symbol = None
+                            
+                            # 1. 首先尝试使用 atos 和 dSYM
+                            try:
+                                atos_cmd = [
+                                    "atos",
+                                    "-arch", binary_image['arch'],
+                                    "-o", self.binary_path,
+                                    "-l", hex(base_address)
+                                ]
+                                
+                                if self.dsym_path:
+                                    atos_cmd.extend(["-d", self.dsym_path])
+                                    
+                                atos_cmd.append(frame['address'])
+                                
+                                atos_result = subprocess.run(
+                                    atos_cmd,
+                                    capture_output=True,
+                                    text=True,
+                                    check=True
+                                )
+                                
+                                symbol = atos_result.stdout.strip()
+                                if symbol and symbol != "??" and frame['address'] not in symbol:
+                                    print(f"atos 符号化成功: {symbol}")
+                                else:
+                                    symbol = None
+                                    
+                            except Exception as e:
+                                print(f"atos 符号化失败: {str(e)}")
+                                
+                            # 2. 如果 atos 失败，尝试使用 lldb
+                            if not symbol:
+                                try:
+                                    lldb_cmd = [
+                                        "lldb",
+                                        "--batch",
+                                        "-o", f"image lookup --address {frame['address']}"
+                                    ]
+                                    
+                                    lldb_result = subprocess.run(
+                                        lldb_cmd,
+                                        capture_output=True,
+                                        text=True
+                                    )
+                                    
+                                    if "Summary: " in lldb_result.stdout:
+                                        symbol = re.search(r'Summary: (.*)', lldb_result.stdout).group(1)
+                                        print(f"lldb 符号化成功: {symbol}")
+                                        
+                                except Exception as e:
+                                    print(f"lldb 符号化失败: {str(e)}")
+                                    
+                            # 3. 如果都失败了，使用原始符号
+                            if not symbol or symbol == "??" or frame['address'] in symbol:
+                                symbol = frame['symbol'] or '<未知符号>'
+                                print(f"使用原始符号: {symbol}")
+                                
+                            # 缓存结果
+                            self.symbol_cache[cache_key] = symbol
+                            
+                        output_lines.append(f"{i:3d} {frame['binary']} {frame['address']} {symbol}")
+                        
+                    except Exception as e:
+                        print(f"符号化帧 {i} 失败: {str(e)}")
+                        output_lines.append(f"{i:3d} {frame['binary']} {frame['address']} {frame['symbol'] or '<符号化失败>'}")
+                        
+            return "\n".join(output_lines)
+            
+        except Exception as e:
+            raise Exception(f"符号化MetricKit崩溃信息失败: {str(e)}")
+            
+    def _symbolicate_address(self, address, arch, load_address):
+        """改进的地址符号化方法"""
+        if not address:
+            return "<无效地址>"
+        
+        # 检查缓存
+        cache_key = f"{address}_{arch}_{load_address}"
+        if cache_key in self.symbol_cache:
+            return self.symbol_cache[cache_key]
+        
+        try:
+            # 计算实际地址
+            slide = int(address, 16) - int(load_address, 16)
+            actual_address = hex(slide)
+            
+            # 使用 atos 命令进行符号化
+            atos_cmd = [
+                "atos",
+                "-arch", arch if arch else "arm64",
+                "-o", self.binary_path,
+                "-l", load_address,
+                address
+            ]
+            
+            if self.dsym_path:
+                atos_cmd.extend(["-d", self.dsym_path])
+            
+            result = subprocess.run(
+                atos_cmd,
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            
+            symbol = result.stdout.strip()
+            
+            # 如果返回的是十六进制地址，说明符号化失败
+            if re.match(r'^0x[0-9a-f]+$', symbol):
+                # 尝试使用 lldb 进行符号化
+                lldb_cmd = [
+                    "lldb",
+                    "--batch",
+                    "-o", f"image lookup --address {address}"
+                ]
+                
+                lldb_result = subprocess.run(
+                    lldb_cmd,
+                    capture_output=True,
+                    text=True
+                )
+                
+                # 解析 lldb 输出
+                if "Summary: " in lldb_result.stdout:
+                    symbol = re.search(r'Summary: (.*)', lldb_result.stdout).group(1)
+                    
+            # 缓存结果
+            self.symbol_cache[cache_key] = symbol
+            return symbol
+            
+        except subprocess.CalledProcessError as e:
+            return f"<符号化失败: {str(e)}>"
+        except Exception as e:
+            return f"<错误: {str(e)}>" 

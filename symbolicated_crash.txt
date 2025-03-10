@@ -1,0 +1,1449 @@
+崩溃报告
+
+设备: iPhone14,2 (iPhone OS 16.3.1 (20D67))
+时间: 2025-03-11T00:41:38.095603
+进程: com.miHoYo.HoYowave (1.12.6 [0122.1515])
+原因: Exception Type: 1, Exception Code: 1, Signal: 11
+
+
+崩溃线程 0 回溯:
+  0 Stellar 0x1026ccd80 specialized SettingsEntity.logGroupInfo(with:) (in Stellar) + 220
+  1 Stellar 0x1026ccd80 specialized SettingsEntity.logGroupInfo(with:) (in Stellar) + 220
+  2 Stellar 0x1026ca4c8 SettingsEntity.update(with:members:) (in Stellar) + 48
+  3 Stellar 0x1026b25f4 SettingsViewModel.initializeOnce(with:members:) (in Stellar) + 60
+  4 Stellar 0x1026b2594 closure #4 in SettingsViewModel.viewDidLoad() (in Stellar) + 104
+  5 Combine 0x1c0ed5944 -[JCommonSupersetMoniter requestInfo] (in Stellar) (JCommonSupersetMoniter.m:0)
+  6 Combine 0x1c0ecc9f0 -[JCommonService .cxx_destruct] (in Stellar) (JCommonService.m:17)
+  7 Combine 0x1c0ed0d80 -[JCommonPasteController dealloc] (in Stellar) (JCommonPasteController.m:57)
+  8 Combine 0x1c0ec00b8 type metadata accessor for SCNetworkReachabilityFlags (in Stellar) + 4
+  9 Combine 0x1c0eca904 -[JCommonCrashEvent addSimpleProperties:] (in Stellar) (JCommonCrashEvent.m:81)
+ 10 libswiftDispatch.dylib 0x1c0ea0f58 0x0000000100000f58 (in Stellar)
+ 11 libdispatch.dylib 0x1bfcbf460 0x0000000100002460 (in Stellar)
+ 12 libdispatch.dylib 0x1bfcc0f88 0x0000000100003f88 (in Stellar)
+ 13 libdispatch.dylib 0x1bfccf7f4 -[JCommonCrashEvent addThreads:] (in Stellar) (JCommonCrashEvent.m:73)
+ 14 libdispatch.dylib 0x1bfccf444 -[JCommonCrashEvent getIsoDate:] (in Stellar) (JCommonCrashEvent.m:46)
+ 15 CoreFoundation 0x1b87396c8 __40-[JCORESisManager requestReportAddress:]_block_invoke (in Stellar) (JCORESisManager.m:897)
+ 16 CoreFoundation 0x1b871b02c -[JOPERATEEventController handleEventPart2:] (in Stellar) (JOPERATEEventController.m:397)
+ 17 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+ 18 GraphicsServices 0x1f2915368 0x0000000100001368 (in Stellar)
+ 19 UIKitCore 0x1bac15668 vqa_decode_frame (in Stellar) + 1272
+ 20 UIKitCore 0x1bac152cc vqa_decode_frame (in Stellar) + 348
+ 21 Stellar 0x10021c070 main (in Stellar) (/<compiler-generated>:0)
+ 22 dyld 0x1d7018960 __39+[JCommonAPNSStateEntity currentState:]_block_invoke (in Stellar) (JCommonApnsStateController.m:62)
+
+线程 1 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 LongLinkService 0x10a51e384 add_adaptation_set (in Stellar) + 80
+  3 LongLinkService 0x10a4ec6cc compute_pkt_fields (in Stellar) + 752
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 2 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Foundation 0x1b2a4bf3c +[JCOREDataSecurity stringHashingByMD5Data:] (in Stellar) (JCOREDataSecurity.m:737)
+  9 UIKitCore 0x1bad4a6a4 ff_decode_sbr_extension_fixed (in Stellar) + 3856
+ 10 Foundation 0x1b2a65518 -[JCOREOldCacheController transOtherCacheData:] (in Stellar) (JCOREOldCacheController.m:160)
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 3 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 Stellar 0x103d578e8 hoyo::comm::Condition::wait(long) (in Stellar) (condition.h:105)
+  3 Stellar 0x103d57ed8 hoyo::comm::Thread::start_routine_periodic(void*) (in Stellar) (thread.h:474)
+  4 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  5 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 4 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 Stellar 0x103d53aa4 hoyo::xlog::XloggerAppender::__AsyncLogThread() (in Stellar) (appender.cc:959)
+  3 Stellar 0x103d57e34 hoyo::comm::Thread::start_routine(void*) (in Stellar) (thread.h:447)
+  4 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  5 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 5 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd268 0x0000000100001268 (in Stellar)
+  1 libsystem_c.dylib 0x1bfd097d8 0x00000001000057d8 (in Stellar)
+  2 libsystem_c.dylib 0x1bfd1dad8 -[JCommonPasteController filterPasteArrayData:] (in Stellar) (JCommonPasteController.m:0)
+  3 Stellar 0x103d74050 monitorCachedData (in Stellar) + 88
+  4 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  5 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 6 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x103d5fabc handleExceptions (in Stellar) + 168
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 7 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x103d5fd54 handleExceptions (in Stellar) + 832
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 8 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 Stellar 0x1010c965c base::MessagePumpKqueue::DoInternalWork(base::MessagePump::Delegate*, base::MessagePump::Delegate::NextWorkInfo*) (in Stellar) + 168
+  2 Stellar 0x1010c94d4 base::MessagePumpKqueue::Run(base::MessagePump::Delegate*) (in Stellar) + 88
+  3 Stellar 0x1010880a8 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 180
+  4 Stellar 0x101055dc8 base::RunLoop::Run(base::Location const&) (in Stellar) + 432
+  5 Stellar 0x1010a7984 base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+  6 Stellar 0x1010927cc base::internal::ServiceThread::Run(base::RunLoop*) (in Stellar) + 16
+  7 Stellar 0x1010a7b08 base::Thread::ThreadMain() (in Stellar) + 364
+  8 Stellar 0x1010c79a0 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 112
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 9 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x1010d207c base::WaitableEvent::TimedWait(base::TimeDelta const&) (in Stellar) + 576
+  5 Stellar 0x10109c1d8 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 48
+  6 Stellar 0x10109ce14 base::internal::WorkerThread::RunWorker() (in Stellar) + 1064
+  7 Stellar 0x10109c8f4 base::internal::WorkerThread::RunBackgroundPooledWorker() (in Stellar) + 16
+  8 Stellar 0x1010c79a0 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 112
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 10 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 Stellar 0x1010c965c base::MessagePumpKqueue::DoInternalWork(base::MessagePump::Delegate*, base::MessagePump::Delegate::NextWorkInfo*) (in Stellar) + 168
+  2 Stellar 0x1010c94d4 base::MessagePumpKqueue::Run(base::MessagePump::Delegate*) (in Stellar) + 88
+  3 Stellar 0x1010880a8 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 180
+  4 Stellar 0x101055dc8 base::RunLoop::Run(base::Location const&) (in Stellar) + 432
+  5 Stellar 0x1010a7984 base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+  6 Stellar 0x1010a7b08 base::Thread::ThreadMain() (in Stellar) + 364
+  7 Stellar 0x1010c79a0 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 112
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 11 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Stellar 0x1010d04e8 base::MessagePumpNSRunLoop::DoRun(base::MessagePump::Delegate*) (in Stellar) + 128
+  9 Stellar 0x1010cf12c base::MessagePumpCFRunLoopBase::Run(base::MessagePump::Delegate*) (in Stellar) + 140
+ 10 Stellar 0x1010880a8 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 180
+ 11 Stellar 0x101055dc8 base::RunLoop::Run(base::Location const&) (in Stellar) + 432
+ 12 Stellar 0x1010a7984 base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+ 13 Stellar 0x1010a7b08 base::Thread::ThreadMain() (in Stellar) + 364
+ 14 Stellar 0x1010c79a0 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 112
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 12 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 Stellar 0x1010c965c base::MessagePumpKqueue::DoInternalWork(base::MessagePump::Delegate*, base::MessagePump::Delegate::NextWorkInfo*) (in Stellar) + 168
+  2 Stellar 0x1010c94d4 base::MessagePumpKqueue::Run(base::MessagePump::Delegate*) (in Stellar) + 88
+  3 Stellar 0x1010880a8 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 180
+  4 Stellar 0x101055dc8 base::RunLoop::Run(base::Location const&) (in Stellar) + 432
+  5 Stellar 0x1010a7984 base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+  6 Stellar 0x1010a7b08 base::Thread::ThreadMain() (in Stellar) + 364
+  7 Stellar 0x1010c79a0 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 112
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 13 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Foundation 0x1b2a4bee8 +[JCOREDataSecurity stringHashingByMD5Data:] (in Stellar) (JCOREDataSecurity.m:731)
+  9 AgoraMeetingKit 0x106b6dbd8 -[JCOREUdpSis sisRequestInfo] (in Stellar) (JCOREUdpSis.m:224)
+ 10 libdispatch.dylib 0x1bfcbf460 0x0000000100002460 (in Stellar)
+ 11 libdispatch.dylib 0x1bfcc0f88 0x0000000100003f88 (in Stellar)
+ 12 libdispatch.dylib 0x1bfcc4074 0x0000000100007074 (in Stellar)
+ 13 libdispatch.dylib 0x1bfcd2a6c __copy_helper_block_e8_32s40b (in Stellar) (JCommonApnsStateController.m:0)
+ 14 libdispatch.dylib 0x1bfcd3284 __46+[JCommonApnsStateController reportAPNSState:]_block_invoke.209 (in Stellar) (JCommonApnsStateController.m:164)
+ 15 libsystem_pthread.dylib 0x206920dbc 0x0000000100000dbc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920b98 0x0000000100000b98 (in Stellar)
+
+线程 14 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 15 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 16 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 17 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 LongLinkService 0x10a600464 wavpack_encode_block (in Stellar) + 1052
+  3 LongLinkService 0x10a5fa544 wavpack_decode_frame (in Stellar) + 884
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 18 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 LongLinkService 0x10a600464 wavpack_encode_block (in Stellar) + 1052
+  3 LongLinkService 0x10a5fa544 wavpack_decode_frame (in Stellar) + 884
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 19 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Foundation 0x1b2a4bee8 +[JCOREDataSecurity stringHashingByMD5Data:] (in Stellar) (JCOREDataSecurity.m:731)
+  9 Stellar 0x10023f288 +[JCOREQueueManager threadEntryPoint:] (in Stellar) (JCOREQueueManager.m:33)
+ 10 Foundation 0x1b2a65518 -[JCOREOldCacheController transOtherCacheData:] (in Stellar) (JCOREOldCacheController.m:160)
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 20 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 CoreFoundation 0x1b8763cd4 __42-[JPUSHNotiInMessageView getTplExtraData:]_block_invoke (in Stellar) + 44
+  8 Stellar 0x1002a90e4 +[JCORECacheThread run] (in Stellar) (JCORECacheThread.m:32)
+  9 Foundation 0x1b2a65518 -[JCOREOldCacheController transOtherCacheData:] (in Stellar) (JCOREOldCacheController.m:160)
+ 10 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 11 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 21 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 CoreFoundation 0x1b8763cd4 __42-[JPUSHNotiInMessageView getTplExtraData:]_block_invoke (in Stellar) + 44
+  8 Stellar 0x10024d204 +[JCORENetworkThread run] (in Stellar) (JCORENetworkController.m:41)
+  9 Foundation 0x1b2a65518 -[JCOREOldCacheController transOtherCacheData:] (in Stellar) (JCOREOldCacheController.m:160)
+ 10 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 11 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 22 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Stellar 0x10092fcec base::MessagePumpNSRunLoop::DoRun(base::MessagePump::Delegate*) (in Stellar) + 128
+  9 Stellar 0x10092e4d4 base::MessagePumpCFRunLoopBase::Run(base::MessagePump::Delegate*) (in Stellar) + 140
+ 10 Stellar 0x1008e42a0 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 268
+ 11 Stellar 0x1008aed4c base::RunLoop::Run(base::Location const&) (in Stellar) + 404
+ 12 Stellar 0x100907f5c base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+ 13 Stellar 0x1008f2080 base::internal::ServiceThread::Run(base::RunLoop*) (in Stellar) + 16
+ 14 Stellar 0x100908084 base::Thread::ThreadMain() (in Stellar) + 272
+ 15 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 16 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 17 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 23 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x100931dd4 base::WaitableEvent::TimedWaitImpl(base::TimeDelta) (in Stellar) + 288
+  5 Stellar 0x1008ca490 base::WaitableEvent::TimedWait(base::TimeDelta) (in Stellar) + 216
+  6 Stellar 0x1008fb5a4 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 40
+  7 Stellar 0x1008fc168 base::internal::WorkerThread::RunWorker() (in Stellar) + 792
+  8 Stellar 0x1008fbd58 base::internal::WorkerThread::RunBackgroundPooledWorker() (in Stellar) + 16
+  9 Stellar 0x1008fbd00 base::internal::WorkerThread::ThreadMain() (in Stellar) + 156
+ 10 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 24 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x100931dd4 base::WaitableEvent::TimedWaitImpl(base::TimeDelta) (in Stellar) + 288
+  5 Stellar 0x1008ca490 base::WaitableEvent::TimedWait(base::TimeDelta) (in Stellar) + 216
+  6 Stellar 0x1008fb5a4 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 40
+  7 Stellar 0x1008fc168 base::internal::WorkerThread::RunWorker() (in Stellar) + 792
+  8 Stellar 0x1008fbe34 base::internal::WorkerThread::RunDedicatedWorker() (in Stellar) + 16
+  9 Stellar 0x1008fbd0c base::internal::WorkerThread::ThreadMain() (in Stellar) + 168
+ 10 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 25 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Stellar 0x10092fcec base::MessagePumpNSRunLoop::DoRun(base::MessagePump::Delegate*) (in Stellar) + 128
+  9 Stellar 0x10092e4d4 base::MessagePumpCFRunLoopBase::Run(base::MessagePump::Delegate*) (in Stellar) + 140
+ 10 Stellar 0x1008e42a0 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 268
+ 11 Stellar 0x1008aed4c base::RunLoop::Run(base::Location const&) (in Stellar) + 404
+ 12 Stellar 0x100907f5c base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+ 13 Stellar 0x100908084 base::Thread::ThreadMain() (in Stellar) + 272
+ 14 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 26 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b12e478 smc_encode_frame (in Stellar) + 4084
+ 14 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 15 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 16 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 17 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 27 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 LongLinkService 0x10a600464 wavpack_encode_block (in Stellar) + 1052
+  3 LongLinkService 0x10a5fa544 wavpack_decode_frame (in Stellar) + 884
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 28 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 29 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 30 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 31 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 32 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Stellar 0x10092fcec base::MessagePumpNSRunLoop::DoRun(base::MessagePump::Delegate*) (in Stellar) + 128
+  9 Stellar 0x10092e4d4 base::MessagePumpCFRunLoopBase::Run(base::MessagePump::Delegate*) (in Stellar) + 140
+ 10 Stellar 0x1008e42a0 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 268
+ 11 Stellar 0x1008aed4c base::RunLoop::Run(base::Location const&) (in Stellar) + 404
+ 12 Stellar 0x100907f5c base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+ 13 Stellar 0x100908084 base::Thread::ThreadMain() (in Stellar) + 272
+ 14 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 33 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x100931dd4 base::WaitableEvent::TimedWaitImpl(base::TimeDelta) (in Stellar) + 288
+  5 Stellar 0x1008ca490 base::WaitableEvent::TimedWait(base::TimeDelta) (in Stellar) + 216
+  6 Stellar 0x1008fb5a4 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 40
+  7 Stellar 0x1008fc168 base::internal::WorkerThread::RunWorker() (in Stellar) + 792
+  8 Stellar 0x1008fbe08 base::internal::WorkerThread::RunSharedWorker() (in Stellar) + 16
+  9 Stellar 0x1008fbd18 base::internal::WorkerThread::ThreadMain() (in Stellar) + 180
+ 10 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 34 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Stellar 0x10092f94c base::MessagePumpCFRunLoop::DoRun(base::MessagePump::Delegate*) (in Stellar) + 84
+  8 Stellar 0x10092e4d4 base::MessagePumpCFRunLoopBase::Run(base::MessagePump::Delegate*) (in Stellar) + 140
+  9 Stellar 0x1008e42a0 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 268
+ 10 Stellar 0x1008aed4c base::RunLoop::Run(base::Location const&) (in Stellar) + 404
+ 11 Stellar 0x100907f5c base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+ 12 Stellar 0x100908084 base::Thread::ThreadMain() (in Stellar) + 272
+ 13 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 14 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 15 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 35 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Stellar 0x10092fcec base::MessagePumpNSRunLoop::DoRun(base::MessagePump::Delegate*) (in Stellar) + 128
+  9 Stellar 0x10092e4d4 base::MessagePumpCFRunLoopBase::Run(base::MessagePump::Delegate*) (in Stellar) + 140
+ 10 Stellar 0x1008e42a0 base::sequence_manager::internal::ThreadControllerWithMessagePumpImpl::Run(bool, base::TimeDelta) (in Stellar) + 268
+ 11 Stellar 0x1008aed4c base::RunLoop::Run(base::Location const&) (in Stellar) + 404
+ 12 Stellar 0x100907f5c base::Thread::Run(base::RunLoop*) (in Stellar) + 60
+ 13 Stellar 0x100908084 base::Thread::ThreadMain() (in Stellar) + 272
+ 14 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 36 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 37 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 38 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 CFNetwork 0x1b9a8aff0 mc_part_420_complex (in Stellar) + 656
+  8 Foundation 0x1b2a65518 -[JCOREOldCacheController transOtherCacheData:] (in Stellar) (JCOREOldCacheController.m:160)
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 39 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 40 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x206928098 type metadata accessor for UIApplicationLaunchOptionsKey (in Stellar) + 12
+  2 AgoraCore 0x1067b59c4 0x00000001000059c4 (in Stellar)
+  3 AgoraCore 0x1067cb2a8 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  4 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  5 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  6 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  7 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 41 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 42 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 43 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 44 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 45 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 46 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 47 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 48 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 49 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 50 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 51 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 52 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 53 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x206928098 type metadata accessor for UIApplicationLaunchOptionsKey (in Stellar) + 12
+  2 AgoraCore 0x1067b59c4 0x00000001000059c4 (in Stellar)
+  3 AgoraCore 0x1067cb2a8 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  4 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  5 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  6 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  7 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 54 回溯:
+  0 AgoraRtcKit 0x10769540c decode_slice (in Stellar) + 5664
+  1 AgoraRtcKit 0x107695408 decode_slice (in Stellar) + 5660
+  2 AgoraRtcKit 0x107695824 decode_plane (in Stellar) + 772
+  3 AgoraRtcKit 0x107695bd0 decode_plane (in Stellar) + 1712
+  4 AgoraRtcKit 0x107741124 ff_vc1_inv_trans_8x4_neon (in Stellar) + 48
+  5 AgoraRtcKit 0x107741064 ff_vc1_inv_trans_8x8_neon (in Stellar) + 452
+  6 AgoraCore 0x1067bad20 specialized AppDelegate.applicationDidReceiveMemoryWarning(_:) (in Stellar) (AppDelegate.swift:171)
+  7 AgoraCore 0x1067bd28c specialized AppLaunchWorkflow.willFinishLaunch(with:application:launchOptions:) (in Stellar) (AppLaunchWorkflow.swift:347)
+  8 AgoraCore 0x1067bbda8 closure #1 in AppLaunchWorkflow.configImageCacheTask() (in Stellar) (AppLaunchWorkflow.swift:190)
+  9 AgoraCore 0x1067bba20 closure #1 in AppLaunchWorkflow.loadDeviceAndUserDataTask() (in Stellar) (AppLaunchWorkflow.swift:125)
+ 10 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+ 11 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+ 12 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 13 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 55 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 AgoraCore 0x1067cb2b4 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  3 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  4 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  5 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  6 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  7 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  8 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 56 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd90c 0x000000010000190c (in Stellar)
+  1 CoreFoundation 0x1b876a694 -[JPUSHCacheObj initWithFileName:] (in Stellar) + 32
+  2 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  3 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 57 回溯:
+  0 CoreFoundation 0x1b8724ca8 -[JCOREAddressAnalysisController getAddressFromSRV:timeout:] (in Stellar) (JCOREAddressAnalysisController.m:643)
+  1 CoreFoundation 0x1b8726144 -[JCOREAddressAnalysisController restoreDnsResults:] (in Stellar) (JCOREAddressAnalysisController.m:826)
+  2 CoreFoundation 0x1b8726144 -[JCOREAddressAnalysisController restoreDnsResults:] (in Stellar) (JCOREAddressAnalysisController.m:826)
+  3 CoreFoundation 0x1b8723da4 -[JCOREAddressAnalysisController addDNSCache:] (in Stellar) (JCOREAddressAnalysisController.m:456)
+  4 CoreFoundation 0x1b874a6f0 +[JPUSHLocalNotificationController findNotification_ios10:] (in Stellar) + 428
+  5 Foundation 0x1b2abd8dc -[JPUSHNotiInMessageManager getInMessageContentWithJCoreThread:] (in Stellar) + 400
+  6 Foundation 0x1b2ababb8 -[JPUSHNotiInMessage reportMessageStatus:withMessageID:withMsgData:] (in Stellar) + 220
+  7 Foundation 0x1b2a67394 -[JCORETcpEventController init] (in Stellar) (JCORETcpEventController.m:89)
+  8 Foundation 0x1b2ab7cb8 -[JPUSHTagAlias p_mergeOldTagAliasRequest:WithNewRequest:UpdateArg:] (in Stellar) + 244
+  9 Foundation 0x1b2a2b6ac reportEventOrSession (in Stellar) (JCommonCrashManager.m:192)
+ 10 Foundation 0x1b2a2aeec JCommonSignalHandler_Sentry (in Stellar) (JCommonCrashManager.m:342)
+ 11 Foundation 0x1b305ad00 std::Cr::unique_ptr<base::FeatureList, std::Cr::default_delete<base::FeatureList>>::reset[abi:v160000](base::FeatureList*) (in Stellar) + 56
+ 12 Foundation 0x1b2a67394 -[JCORETcpEventController init] (in Stellar) (JCORETcpEventController.m:89)
+ 13 Foundation 0x1b2ab7cb8 -[JPUSHTagAlias p_mergeOldTagAliasRequest:WithNewRequest:UpdateArg:] (in Stellar) + 244
+ 14 Foundation 0x1b2a2b6ac reportEventOrSession (in Stellar) (JCommonCrashManager.m:192)
+ 15 Foundation 0x1b2a2b858 -[JCommonCrashManager backtrace] (in Stellar) (JCommonCrashManager.m:407)
+ 16 Foundation 0x1b305ad00 std::Cr::unique_ptr<base::FeatureList, std::Cr::default_delete<base::FeatureList>>::reset[abi:v160000](base::FeatureList*) (in Stellar) + 56
+ 17 Foundation 0x1b2a67394 -[JCORETcpEventController init] (in Stellar) (JCORETcpEventController.m:89)
+ 18 Foundation 0x1b2ab7cb8 -[JPUSHTagAlias p_mergeOldTagAliasRequest:WithNewRequest:UpdateArg:] (in Stellar) + 244
+ 19 Foundation 0x1b2a2b6ac reportEventOrSession (in Stellar) (JCommonCrashManager.m:192)
+ 20 Foundation 0x1b2a2aed4 JCommonSignalHandler_Sentry (in Stellar) (JCommonCrashManager.m:342)
+ 21 Foundation 0x1b305ad00 std::Cr::unique_ptr<base::FeatureList, std::Cr::default_delete<base::FeatureList>>::reset[abi:v160000](base::FeatureList*) (in Stellar) + 56
+ 22 Foundation 0x1b2a67394 -[JCORETcpEventController init] (in Stellar) (JCORETcpEventController.m:89)
+ 23 Foundation 0x1b2ab7cb8 -[JPUSHTagAlias p_mergeOldTagAliasRequest:WithNewRequest:UpdateArg:] (in Stellar) + 244
+ 24 Foundation 0x1b2a2b6ac reportEventOrSession (in Stellar) (JCommonCrashManager.m:192)
+ 25 Foundation 0x1b2a2b858 -[JCommonCrashManager backtrace] (in Stellar) (JCommonCrashManager.m:407)
+ 26 Foundation 0x1b305ad00 std::Cr::unique_ptr<base::FeatureList, std::Cr::default_delete<base::FeatureList>>::reset[abi:v160000](base::FeatureList*) (in Stellar) + 56
+ 27 Foundation 0x1b2a67394 -[JCORETcpEventController init] (in Stellar) (JCORETcpEventController.m:89)
+ 28 Foundation 0x1b2ab7cb8 -[JPUSHTagAlias p_mergeOldTagAliasRequest:WithNewRequest:UpdateArg:] (in Stellar) + 244
+ 29 Foundation 0x1b2a2b6ac reportEventOrSession (in Stellar) (JCommonCrashManager.m:192)
+ 30 Foundation 0x1b2a2aed4 JCommonSignalHandler_Sentry (in Stellar) (JCommonCrashManager.m:342)
+ 31 Foundation 0x1b305ad00 std::Cr::unique_ptr<base::FeatureList, std::Cr::default_delete<base::FeatureList>>::reset[abi:v160000](base::FeatureList*) (in Stellar) + 56
+ 32 Foundation 0x1b2a6f3b8 -[JCORELogger handleCmdControl:] (in Stellar) (JCORELogger.m:165)
+ 33 Foundation 0x1b2a6ee44 -[JCORELogger init] (in Stellar) (JCORELogger.m:86)
+ 34 Foundation 0x1b2ab6ce0 -[JPUSHTagAlias setTagAliasUsingBlock:] (in Stellar) + 620
+ 35 Foundation 0x1b305b45c void std::Cr::__split_buffer<std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>, std::Cr::allocator<std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>>&>::emplace_back<std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>>(std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>&&) (in Stellar) + 348
+ 36 Foundation 0x1b305b174 std::Cr::__wrap_iter<std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>*> std::Cr::vector<std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>, std::Cr::allocator<std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>>>::emplace<std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>>(std::Cr::__wrap_iter<std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry> const*>, std::Cr::pair<std::Cr::basic_string<char, std::Cr::char_traits<char>, std::Cr::allocator<char>>, base::FeatureList::OverrideEntry>&&) (in Stellar) + 724
+ 37 Foundation 0x1b2a7caf4 +[JCOREUtilities jsonToData:] (in Stellar) (JCOREUtilities.m:0)
+ 38 Foundation 0x1b30560c4 base::debug::GlobalActivityTracker::~GlobalActivityTracker() (in Stellar) + 152
+ 39 Foundation 0x1b2a401cc -[JCOREHttpChannelController sharedArray:and:] (in Stellar) (JCOREHttpChannelController.m:546)
+ 40 CoreFoundation 0x1b86bed10 -[JCommonCrashContexts serialize] (in Stellar) (JCommonCrashContexts.m:16)
+ 41 CoreFoundation 0x1b8727320 __51-[JCOREAddressAnalysisController arrayInFixedTime:]_block_invoke (in Stellar) (JCOREAddressAnalysisController.m:976)
+ 42 AudioSession 0x1d19a8fb0 -[JCOREConnectPool setSocketDelegate:] (in Stellar) (JCOREConnectPool.h:0)
+ 43 AudioSession 0x1d199587c -[JCommonSupersetManager startHttpMoniter:] (in Stellar) (JCommonSupersetManager.m:126)
+ 44 AudioSession 0x1d19879a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+ 45 AgoraRtcKit 0x107b8b28c quic::GeneralLossAlgorithm::SpuriousLossDetected(quic::QuicUnackedPacketMap const&, quic::RttStats const&, quic::QuicTime, quic::QuicPacketNumber, quic::QuicPacketNumber) (in Stellar) + 172
+ 46 AgoraRtcKit 0x107a263a4 disk_cache::BlockFiles::RemoveEmptyFile(disk_cache::FileType) (in Stellar) + 44
+ 47 AgoraRtcKit 0x107b7dac0 http2::HpackStringPair* std::Cr::construct_at[abi:v160000]<http2::HpackStringPair, char const (&) [1], char const (&) [1], http2::HpackStringPair*>(http2::HpackStringPair*, char const (&) [1], char const (&) [1]) (in Stellar) + 168
+ 48 AgoraRtcKit 0x107b87560 quic::Bbr2ProbeBwMode::ProbeInflightHighUpward(quic::Bbr2CongestionEvent const&) (in Stellar) + 72
+ 49 AgoraRtcKit 0x107b87dd0 quic::Bbr2Sender::ApplyConnectionOptions(std::Cr::vector<unsigned int, std::Cr::allocator<unsigned int>> const&) (in Stellar) + 104
+ 50 AgoraRtcKit 0x107741124 ff_vc1_inv_trans_8x4_neon (in Stellar) + 48
+ 51 AgoraRtcKit 0x107741064 ff_vc1_inv_trans_8x8_neon (in Stellar) + 452
+ 52 AgoraCore 0x1067bad20 specialized AppDelegate.applicationDidReceiveMemoryWarning(_:) (in Stellar) (AppDelegate.swift:171)
+ 53 AgoraCore 0x1067bd250 specialized AppLaunchWorkflow.willFinishLaunch(with:application:launchOptions:) (in Stellar) (AppLaunchWorkflow.swift:346)
+ 54 AgoraCore 0x1067bbda8 closure #1 in AppLaunchWorkflow.configImageCacheTask() (in Stellar) (AppLaunchWorkflow.swift:190)
+ 55 AgoraCore 0x1067bba20 closure #1 in AppLaunchWorkflow.loadDeviceAndUserDataTask() (in Stellar) (AppLaunchWorkflow.swift:125)
+ 56 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+ 57 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+ 58 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 59 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 58 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 59 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 60 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 AgoraCore 0x1067cb2b4 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  3 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  4 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  5 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  6 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  7 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  8 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 61 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 62 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 AgoraCore 0x1067cb2b4 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  3 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  4 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  5 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  6 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  7 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  8 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 63 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 AgoraCore 0x1067cb2b4 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  3 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  4 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  5 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  6 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  7 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  8 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 64 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 AgoraCore 0x1067cb2b4 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  3 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  4 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  5 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  6 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  7 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  8 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 65 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 AgoraCore 0x1067cb2b4 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  3 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  4 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  5 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  6 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  7 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  8 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 66 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 AgoraCore 0x1067cb2b4 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  3 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  4 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  5 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  6 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  7 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  8 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 67 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 68 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 69 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 70 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 71 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x206928098 type metadata accessor for UIApplicationLaunchOptionsKey (in Stellar) + 12
+  2 AgoraCore 0x1067b59c4 0x00000001000059c4 (in Stellar)
+  3 AgoraCore 0x1067cb2a8 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  4 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  5 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  6 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  7 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 72 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x206928098 type metadata accessor for UIApplicationLaunchOptionsKey (in Stellar) + 12
+  2 AgoraCore 0x1067b59c4 0x00000001000059c4 (in Stellar)
+  3 AgoraCore 0x1067cb2a8 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  4 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  5 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  6 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  7 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 73 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 SocketRocket 0x109c9f964 0x0000000100007964 (in Stellar)
+  9 Foundation 0x1b2a65518 -[JCOREOldCacheController transOtherCacheData:] (in Stellar) (JCOREOldCacheController.m:160)
+ 10 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 11 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 74 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x206928098 type metadata accessor for UIApplicationLaunchOptionsKey (in Stellar) + 12
+  2 AgoraCore 0x1067b59c4 0x00000001000059c4 (in Stellar)
+  3 AgoraCore 0x1067cb2a8 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  4 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  5 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  6 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  7 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 75 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 stellar_sdk_wrapper 0x10b167a70 ff_hevc_cabac_init (in Stellar) + 148
+  5 stellar_sdk_wrapper 0x10b137ff0 ff_epzs_motion_search (in Stellar) + 5312
+  6 stellar_sdk_wrapper 0x10b13878c ff_epzs_motion_search (in Stellar) + 7260
+  7 stellar_sdk_wrapper 0x10b13859c ff_epzs_motion_search (in Stellar) + 6764
+  8 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 76 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 77 回溯:
+  0 libsystem_kernel.dylib 0x1f61ccf44 -[JCommonLocationController stopLocationStrategy] (in Stellar) (JCommonLocationController.m:588)
+  1 AgoraCore 0x1067b5210 0x0000000100005210 (in Stellar)
+  2 AgoraCore 0x1067b99a4 specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:51)
+  3 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  4 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  5 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 78 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 CoreFoundation 0x1b8763cd4 __42-[JPUSHNotiInMessageView getTplExtraData:]_block_invoke (in Stellar) + 44
+  8 CoreMotion 0x1c3cf6ef8 -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:92)
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 79 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 80 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 stellar_sdk_wrapper 0x10b16621c OUTLINED_FUNCTION_911 (in Stellar) + 8
+  9 stellar_sdk_wrapper 0x10b165068 OUTLINED_FUNCTION_681 (in Stellar) + 24
+ 10 stellar_sdk_wrapper 0x10b14ae3c hpel_motion_search (in Stellar) + 3664
+ 11 stellar_sdk_wrapper 0x10b147ec0 ff_epzs_motion_search (in Stellar) + 70544
+ 12 stellar_sdk_wrapper 0x10b151e58 hex_search (in Stellar) + 1900
+ 13 stellar_sdk_wrapper 0x10b151fd4 hex_search (in Stellar) + 2280
+ 14 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 15 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 16 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 81 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 LongLinkService 0x10a600464 wavpack_encode_block (in Stellar) + 1052
+  3 LongLinkService 0x10a5217b0 hls_deinit (in Stellar) + 60
+  4 LongLinkService 0x10a523714 hls_start (in Stellar) + 1464
+  5 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 82 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 LongLinkService 0x10a600464 wavpack_encode_block (in Stellar) + 1052
+  3 LongLinkService 0x10a5217b0 hls_deinit (in Stellar) + 60
+  4 LongLinkService 0x10a523714 hls_start (in Stellar) + 1464
+  5 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  6 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  7 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 83 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 Foundation 0x1b2a4c054 +[JCOREDataSecurity dataHashingMD5:] (in Stellar) (JCOREDataSecurity.m:752)
+  8 Foundation 0x1b2a4bee8 +[JCOREDataSecurity stringHashingByMD5Data:] (in Stellar) (JCOREDataSecurity.m:731)
+  9 Stellar 0x1032cbdf0 MainThreadDetector.run() (in Stellar) + 308
+ 10 Stellar 0x1032cc3bc @objc MainThreadDetector.run() (in Stellar) + 24
+ 11 Foundation 0x1b2a65518 -[JCOREOldCacheController transOtherCacheData:] (in Stellar) (JCOREOldCacheController.m:160)
+ 12 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 13 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 84 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 CoreFoundation 0x1b8719ac4 -[JOPERATEEventController updateUserProperties:error:] (in Stellar) (JOPERATEEventController.m:236)
+  5 CoreFoundation 0x1b871ad08 -[JOPERATEEventController handleEventPart1:] (in Stellar) (JOPERATEEventController.m:370)
+  6 CoreFoundation 0x1b871feb0 -[JCOREDevidBanRequest init] (in Stellar) (JCOREDevidBanRequest.m:35)
+  7 CFNetwork 0x1b9a8aff0 mc_part_420_complex (in Stellar) + 656
+  8 Foundation 0x1b2a65518 -[JCOREOldCacheController transOtherCacheData:] (in Stellar) (JCOREOldCacheController.m:160)
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 85 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x1010d207c base::WaitableEvent::TimedWait(base::TimeDelta const&) (in Stellar) + 576
+  5 Stellar 0x10109c1d8 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 48
+  6 Stellar 0x10109ce14 base::internal::WorkerThread::RunWorker() (in Stellar) + 1064
+  7 Stellar 0x10109c978 base::internal::WorkerThread::RunPooledWorker() (in Stellar) + 16
+  8 Stellar 0x1010c79a0 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 112
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 86 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x206928098 type metadata accessor for UIApplicationLaunchOptionsKey (in Stellar) + 12
+  2 AgoraCore 0x1067b59c4 0x00000001000059c4 (in Stellar)
+  3 AgoraCore 0x1067cb2a8 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  4 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  5 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  6 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  7 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 87 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x206928098 type metadata accessor for UIApplicationLaunchOptionsKey (in Stellar) + 12
+  2 AgoraCore 0x1067b59c4 0x00000001000059c4 (in Stellar)
+  3 AgoraCore 0x1067cb2a8 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  4 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  5 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  6 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  7 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 88 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x206928098 type metadata accessor for UIApplicationLaunchOptionsKey (in Stellar) + 12
+  2 AgoraCore 0x1067b59c4 0x00000001000059c4 (in Stellar)
+  3 AgoraCore 0x1067cb2a8 -[JCommonActiveUserController appLauchReportInfo] (in Stellar) (JCommonActiveUserController.m:55)
+  4 AgoraCore 0x1067b9aac specialized AppDelegate.application(_:didFinishLaunchingWithOptions:) (in Stellar) (AppDelegate.swift:49)
+  5 AgoraCore 0x1067bba94 closure #1 in AppLaunchWorkflow.registerBizModules(with:) (in Stellar) (AppLaunchWorkflow.swift:149)
+  6 AgoraCore 0x1067bafc4 type metadata accessor for OS_dispatch_queue (in Stellar) (/<compiler-generated>:0)
+  7 AgoraCore 0x1067cadc0 __35-[JCommonPasteReportManager report]_block_invoke (in Stellar) (JCommonPasteController.m:481)
+  8 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  9 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 89 回溯:
+  0 libsystem_kernel.dylib 0x1f61c17e0 0x00000001000057e0 (in Stellar)
+  1 Network 0x1b938aa7c net::HttpRequestHeaders::AddHeadersFromString(base::BasicStringPiece<char, std::Cr::char_traits<char>>) (in Stellar) + 28
+  2 Network 0x1b91d55ec absl::cord_internal::CordRepBtree* absl::cord_internal::CordRepBtree::AddCordRep<(absl::cord_internal::CordRepBtree::EdgeType)1>(absl::cord_internal::CordRepBtree*, absl::cord_internal::CordRep*) (in Stellar) + 28
+  3 libsystem_info.dylib 0x1c6d2f8e8 0x00000001000048e8 (in Stellar)
+  4 libsystem_info.dylib 0x1c6d2cc20 0x0000000100001c20 (in Stellar)
+  5 stellar_sdk_wrapper 0x10ad08cec -[JCOREDefaultLogger logMessage:] (in Stellar) (JCORELogger.m:46)
+  6 stellar_sdk_wrapper 0x10ad08924 -[JCORECrashConfigRequest authorizationString] (in Stellar) (JCORECrashConfigRequest.m:108)
+  7 stellar_sdk_wrapper 0x10ad2a7d0 -[JCOREAddressAnalysisController removeWifiCache:] (in Stellar) (JCOREAddressAnalysisController.m:758)
+  8 stellar_sdk_wrapper 0x10ad205d8 -[JOPERATEEventController handleEventPart2:] (in Stellar) (JOPERATEEventController.m:441)
+  9 stellar_sdk_wrapper 0x10ad20d3c -[JOPERATEEventController operationperipheralProperty] (in Stellar) (JOPERATEEventController.m:474)
+ 10 stellar_sdk_wrapper 0x10b129b54 put_hevc_epel_hv_8 (in Stellar) + 192
+ 11 stellar_sdk_wrapper 0x10b12bdf0 hevc_loop_filter_luma_8 (in Stellar) + 732
+ 12 stellar_sdk_wrapper 0x10b12bd7c hevc_loop_filter_luma_8 (in Stellar) + 616
+ 13 stellar_sdk_wrapper 0x10b12bb80 hevc_loop_filter_luma_8 (in Stellar) + 108
+ 14 stellar_sdk_wrapper 0x10b162060 OUTLINED_FUNCTION_155 (in Stellar) + 12
+ 15 stellar_sdk_wrapper 0x10b12b8c4 hevc_loop_filter_luma_12 (in Stellar) + 936
+ 16 stellar_sdk_wrapper 0x10b13896c ff_epzs_motion_search (in Stellar) + 7740
+ 17 stellar_sdk_wrapper 0x10b1385f4 ff_epzs_motion_search (in Stellar) + 6852
+ 18 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+ 19 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 20 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 90 回溯:
+  0 libsystem_pthread.dylib 0x206920b90 0x0000000100000b90 (in Stellar)
+
+线程 91 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x100931dd4 base::WaitableEvent::TimedWaitImpl(base::TimeDelta) (in Stellar) + 288
+  5 Stellar 0x1008ca490 base::WaitableEvent::TimedWait(base::TimeDelta) (in Stellar) + 216
+  6 Stellar 0x1008fb5a4 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 40
+  7 Stellar 0x1008fc168 base::internal::WorkerThread::RunWorker() (in Stellar) + 792
+  8 Stellar 0x1008fbddc base::internal::WorkerThread::RunPooledWorker() (in Stellar) + 16
+  9 Stellar 0x1008fbcd0 base::internal::WorkerThread::ThreadMain() (in Stellar) + 108
+ 10 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 92 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x100931dd4 base::WaitableEvent::TimedWaitImpl(base::TimeDelta) (in Stellar) + 288
+  5 Stellar 0x1008ca490 base::WaitableEvent::TimedWait(base::TimeDelta) (in Stellar) + 216
+  6 Stellar 0x1008fb5a4 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 40
+  7 Stellar 0x1008fc168 base::internal::WorkerThread::RunWorker() (in Stellar) + 792
+  8 Stellar 0x1008fbddc base::internal::WorkerThread::RunPooledWorker() (in Stellar) + 16
+  9 Stellar 0x1008fbcd0 base::internal::WorkerThread::ThreadMain() (in Stellar) + 108
+ 10 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 93 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd964 0x0000000100001964 (in Stellar)
+  1 libsystem_platform.dylib 0x20688afc0 0x0000000100000fc0 (in Stellar)
+  2 Network 0x1b9308128 net::(anonymous namespace)::ApplySameSiteCookieWarningToStatus(net::CookieSameSite, net::CookieEffectiveSameSite, bool, net::CookieOptions::SameSiteCookieContext const&, net::CookieInclusionStatus*, bool) (in Stellar) + 144
+  3 Network 0x1b8af75e8 +[JCOREUtilities transformStrToDate:] (in Stellar) (JCOREUtilities.m:0)
+  4 Network 0x1b93093a4 net::CookiePriorityToString(net::CookiePriority) (in Stellar) + 28
+  5 Network 0x1b8af5cdc +[JCOREUtilities usable_memory] (in Stellar) (JCOREUtilities.m:819)
+  6 libdispatch.dylib 0x1bfcc0f88 0x0000000100003f88 (in Stellar)
+  7 libdispatch.dylib 0x1bfcc4418 0x0000000100007418 (in Stellar)
+  8 libdispatch.dylib 0x1bfcd7a58 -[JCommonPasteController handleCmdControl:] (in Stellar) (JCommonPasteController.m:0)
+  9 libdispatch.dylib 0x1bfcca4a4 specialized AppLaunchWorkflow.didFinishLaunch(with:application:launchOptions:) (in Stellar) (AppLaunchWorkflow.swift:373)
+ 10 libdispatch.dylib 0x1bfcd3e10 -[JCommonCrashId isEqual:] (in Stellar) (JCommonCrashId.m:102)
+ 11 libsystem_pthread.dylib 0x206920df8 0x0000000100000df8 (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920b98 0x0000000100000b98 (in Stellar)
+
+线程 94 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 stellar_sdk_wrapper 0x10b167a70 ff_hevc_cabac_init (in Stellar) + 148
+  5 stellar_sdk_wrapper 0x10b137ff0 ff_epzs_motion_search (in Stellar) + 5312
+  6 stellar_sdk_wrapper 0x10b138a90 ff_epzs_motion_search (in Stellar) + 8032
+  7 stellar_sdk_wrapper 0x10b138570 ff_epzs_motion_search (in Stellar) + 6720
+  8 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 95 回溯:
+  0 libsystem_pthread.dylib 0x206920b90 0x0000000100000b90 (in Stellar)
+
+线程 96 回溯:
+  0 libsystem_pthread.dylib 0x206920b90 0x0000000100000b90 (in Stellar)
+
+线程 97 回溯:
+  0 libsystem_kernel.dylib 0x1f61bd67c 0x000000010000167c (in Stellar)
+  1 libsystem_pthread.dylib 0x20692806c main (in Stellar) (main.swift:13)
+  2 JavaScriptCore 0x1cbe77104 specialized ProtocolType.init(rawValue:) (in Stellar) + 1108
+  3 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  4 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 98 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x100931dd4 base::WaitableEvent::TimedWaitImpl(base::TimeDelta) (in Stellar) + 288
+  5 Stellar 0x1008ca490 base::WaitableEvent::TimedWait(base::TimeDelta) (in Stellar) + 216
+  6 Stellar 0x1008fb5a4 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 40
+  7 Stellar 0x1008fc168 base::internal::WorkerThread::RunWorker() (in Stellar) + 792
+  8 Stellar 0x1008fbddc base::internal::WorkerThread::RunPooledWorker() (in Stellar) + 16
+  9 Stellar 0x1008fbcd0 base::internal::WorkerThread::ThreadMain() (in Stellar) + 108
+ 10 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 99 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x100931dd4 base::WaitableEvent::TimedWaitImpl(base::TimeDelta) (in Stellar) + 288
+  5 Stellar 0x1008ca490 base::WaitableEvent::TimedWait(base::TimeDelta) (in Stellar) + 216
+  6 Stellar 0x1008fb5a4 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 40
+  7 Stellar 0x1008fc168 base::internal::WorkerThread::RunWorker() (in Stellar) + 792
+  8 Stellar 0x1008fbddc base::internal::WorkerThread::RunPooledWorker() (in Stellar) + 16
+  9 Stellar 0x1008fbcd0 base::internal::WorkerThread::ThreadMain() (in Stellar) + 108
+ 10 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 100 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x100931dd4 base::WaitableEvent::TimedWaitImpl(base::TimeDelta) (in Stellar) + 288
+  5 Stellar 0x1008ca490 base::WaitableEvent::TimedWait(base::TimeDelta) (in Stellar) + 216
+  6 Stellar 0x1008fb5a4 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 40
+  7 Stellar 0x1008fc168 base::internal::WorkerThread::RunWorker() (in Stellar) + 792
+  8 Stellar 0x1008fbddc base::internal::WorkerThread::RunPooledWorker() (in Stellar) + 16
+  9 Stellar 0x1008fbcd0 base::internal::WorkerThread::ThreadMain() (in Stellar) + 108
+ 10 Stellar 0x100928678 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 120
+ 11 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 12 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 101 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 Stellar 0x1010d207c base::WaitableEvent::TimedWait(base::TimeDelta const&) (in Stellar) + 576
+  5 Stellar 0x10109c1d8 base::internal::WorkerThread::Delegate::WaitForWork(base::WaitableEvent*) (in Stellar) + 48
+  6 Stellar 0x10109cb10 base::internal::WorkerThread::RunWorker() (in Stellar) + 292
+  7 Stellar 0x10109c978 base::internal::WorkerThread::RunPooledWorker() (in Stellar) + 16
+  8 Stellar 0x1010c79a0 base::(anonymous namespace)::ThreadFunc(void*) (in Stellar) + 112
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 102 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 stellar_sdk_wrapper 0x10b167a70 ff_hevc_cabac_init (in Stellar) + 148
+  5 stellar_sdk_wrapper 0x10b137ff0 ff_epzs_motion_search (in Stellar) + 5312
+  6 stellar_sdk_wrapper 0x10b13878c ff_epzs_motion_search (in Stellar) + 7260
+  7 stellar_sdk_wrapper 0x10b1385f4 ff_epzs_motion_search (in Stellar) + 6852
+  8 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 103 回溯:
+  0 libsystem_kernel.dylib 0x1f61c0494 0x0000000100004494 (in Stellar)
+  1 LongLinkService 0x10a52c158 xwma_read_header (in Stellar) + 872
+  2 LongLinkService 0x10a55f178 mov_read_packet (in Stellar) + 2452
+  3 LongLinkService 0x10a55cb48 ff_mov_read_stsd_entries (in Stellar) + 548
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 104 回溯:
+  0 libsystem_kernel.dylib 0x1f61c0494 0x0000000100004494 (in Stellar)
+  1 LongLinkService 0x10a52c158 xwma_read_header (in Stellar) + 872
+  2 LongLinkService 0x10a55f178 mov_read_packet (in Stellar) + 2452
+  3 LongLinkService 0x10a55cb48 ff_mov_read_stsd_entries (in Stellar) + 548
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 105 回溯:
+  0 libsystem_kernel.dylib 0x1f61c0494 0x0000000100004494 (in Stellar)
+  1 LongLinkService 0x10a52c158 xwma_read_header (in Stellar) + 872
+  2 LongLinkService 0x10a55f178 mov_read_packet (in Stellar) + 2452
+  3 LongLinkService 0x10a55cb48 ff_mov_read_stsd_entries (in Stellar) + 548
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 106 回溯:
+  0 libsystem_kernel.dylib 0x1f61c0494 0x0000000100004494 (in Stellar)
+  1 LongLinkService 0x10a52c158 xwma_read_header (in Stellar) + 872
+  2 LongLinkService 0x10a55f178 mov_read_packet (in Stellar) + 2452
+  3 LongLinkService 0x10a55cb48 ff_mov_read_stsd_entries (in Stellar) + 548
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 107 回溯:
+  0 libsystem_kernel.dylib 0x1f61c0494 0x0000000100004494 (in Stellar)
+  1 LongLinkService 0x10a52c158 xwma_read_header (in Stellar) + 872
+  2 LongLinkService 0x10a55f178 mov_read_packet (in Stellar) + 2452
+  3 LongLinkService 0x10a55cb48 ff_mov_read_stsd_entries (in Stellar) + 548
+  4 LongLinkService 0x10a4e0df4 wav_read_header (in Stellar) + 3276
+  5 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+  6 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 108 回溯:
+  0 libsystem_kernel.dylib 0x1f61bcda8 0x0000000100000da8 (in Stellar)
+  1 libsystem_kernel.dylib 0x1f61cfa1c +[JCommonSdkController isSdkInfoChange:newContent:] (in Stellar) (JCommonSdkController.m:79)
+  2 libsystem_kernel.dylib 0x1f61cfc5c -[JCommonCrashSession serialize] (in Stellar) (JCommonCrashSession.m:42)
+  3 libsystem_kernel.dylib 0x1f61bd2ec 0x00000001000012ec (in Stellar)
+  4 stellar_sdk_wrapper 0x10b167a70 ff_hevc_cabac_init (in Stellar) + 148
+  5 stellar_sdk_wrapper 0x10b137ff0 ff_epzs_motion_search (in Stellar) + 5312
+  6 stellar_sdk_wrapper 0x10b13878c ff_epzs_motion_search (in Stellar) + 7260
+  7 stellar_sdk_wrapper 0x10b138570 ff_epzs_motion_search (in Stellar) + 6720
+  8 stellar_sdk_wrapper 0x10b16319c OUTLINED_FUNCTION_318 (in Stellar) + 4
+  9 libsystem_pthread.dylib 0x2069216cc 0x00000001000016cc (in Stellar)
+ 10 libsystem_pthread.dylib 0x206920ba4 0x0000000100000ba4 (in Stellar)
+
+线程 109 回溯:
+  0 libsystem_pthread.dylib 0x206920b90 0x0000000100000b90 (in Stellar)
+
+线程 110 回溯:
+  0 libsystem_pthread.dylib 0x206920b90 0x0000000100000b90 (in Stellar)

@@ -3,14 +3,17 @@
 
 import sys
 import os
+import tempfile
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                             QHBoxLayout, QPushButton, QLabel, QFileDialog, 
                             QTextEdit, QSplitter, QMessageBox, QProgressBar,
-                            QTabWidget, QGroupBox, QFormLayout, QLineEdit)
+                            QTabWidget, QGroupBox, QFormLayout, QLineEdit, QDialog,
+                            QRadioButton)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtGui import QFont, QIcon
 
 from crash_symbolizer import CrashSymbolizer
+from metrickit_converter import MetricKitConverter
 
 class SymbolizationThread(QThread):
     """用于在后台执行符号化过程的线程"""
@@ -18,15 +21,17 @@ class SymbolizationThread(QThread):
     result_signal = pyqtSignal(str)
     finished_signal = pyqtSignal()
     
-    def __init__(self, archive_path=None, crash_path=None):
+    def __init__(self, archive_path=None, crash_path=None, is_json=False):
         super().__init__()
         self.archive_path = archive_path
         self.crash_path = crash_path
+        self.is_json = is_json
         self.symbolizer = CrashSymbolizer()
         
-    def set_paths(self, archive_path, crash_path):
+    def set_paths(self, archive_path, crash_path, is_json=False):
         self.archive_path = archive_path
         self.crash_path = crash_path
+        self.is_json = is_json
         
     def run(self):
         try:
@@ -38,19 +43,34 @@ class SymbolizationThread(QThread):
             self.symbolizer.load_archive(self.archive_path)
             self.progress_signal.emit("✓ Archive 加载成功\n")
             
-            # 加载 crash 文件
-            self.progress_signal.emit("\n[2] 加载 Crash 文件...")
-            crash_content = self.symbolizer.load_crash_file(self.crash_path)
-            self.progress_signal.emit("✓ Crash 文件加载成功\n")
-            
-            # 解析 crash 内容
-            self.progress_signal.emit("\n[3] 解析 Crash 内容...")
-            self.symbolizer.parse_crash(crash_content)
-            self.progress_signal.emit("✓ Crash 内容解析成功\n")
-            
-            # 符号化处理
-            self.progress_signal.emit("\n[4] 开始符号化...")
-            result = self.symbolizer.symbolize(self.progress_signal)
+            if self.is_json:
+                # MetricKit JSON格式解析
+                self.progress_signal.emit("\n[2] 解析 MetricKit JSON 文件...")
+                crash_content = self.symbolizer.load_metrickit_json(self.crash_path)
+                self.progress_signal.emit("✓ JSON 文件解析成功\n")
+                
+                # 解析 crash 内容
+                self.progress_signal.emit("\n[3] 提取崩溃信息...")
+                self.symbolizer.parse_metrickit_crash(crash_content)
+                self.progress_signal.emit("✓ 崩溃信息提取成功\n")
+                
+                # 符号化处理
+                self.progress_signal.emit("\n[4] 开始符号化...")
+                result = self.symbolizer.symbolize_metrickit(self.progress_signal)
+            else:
+                # 传统 Crash 文件解析
+                self.progress_signal.emit("\n[2] 加载 Crash 文件...")
+                crash_content = self.symbolizer.load_crash_file(self.crash_path)
+                self.progress_signal.emit("✓ Crash 文件加载成功\n")
+                
+                # 解析 crash 内容
+                self.progress_signal.emit("\n[3] 解析 Crash 内容...")
+                self.symbolizer.parse_crash(crash_content)
+                self.progress_signal.emit("✓ Crash 内容解析成功\n")
+                
+                # 符号化处理
+                self.progress_signal.emit("\n[4] 开始符号化...")
+                result = self.symbolizer.symbolize(self.progress_signal)
             
             # 发送结果
             self.result_signal.emit(result)
@@ -67,6 +87,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.archive_path = None
         self.crash_path = None
+        self.json_path = None
         self.symbolized_result = ""
         self.init_ui()
         self.thread = SymbolizationThread()
@@ -88,6 +109,15 @@ class MainWindow(QMainWindow):
         file_group = QGroupBox("文件选择")
         file_layout = QFormLayout()
         
+        # 添加解析方式选择
+        parse_type_layout = QHBoxLayout()
+        self.crash_radio = QRadioButton("Crash解析")
+        self.json_radio = QRadioButton("JSON解析")
+        self.crash_radio.setChecked(True)  # 默认选中Crash解析
+        parse_type_layout.addWidget(self.crash_radio)
+        parse_type_layout.addWidget(self.json_radio)
+        file_layout.addRow("解析方式:", parse_type_layout)
+        
         # Archive文件选择
         archive_layout = QHBoxLayout()
         self.archive_path_edit = QLineEdit()
@@ -108,11 +138,22 @@ class MainWindow(QMainWindow):
         crash_layout.addWidget(crash_button)
         file_layout.addRow("Crash文件:", crash_layout)
         
+        # JSON文件选择
+        json_layout = QHBoxLayout()
+        self.json_path_edit = QLineEdit()
+        self.json_path_edit.setReadOnly(True)
+        json_button = QPushButton("选择JSON文件")
+        json_button.clicked.connect(self.select_json)
+        json_layout.addWidget(self.json_path_edit)
+        json_layout.addWidget(json_button)
+        file_layout.addRow("JSON文件:", json_layout)
+        
         file_group.setLayout(file_layout)
         main_layout.addWidget(file_group)
         
         # 创建按钮区域
         button_layout = QHBoxLayout()
+        
         self.symbolize_button = QPushButton("开始符号化")
         self.symbolize_button.clicked.connect(self.start_symbolization)
         self.symbolize_button.setEnabled(False)
@@ -179,16 +220,50 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage("准备就绪")
         
     def setup_connections(self):
-        self.archive_path_edit.textChanged.connect(self.update_start_button)
-        self.crash_path_edit.textChanged.connect(self.update_start_button)
-        self.symbolize_button.clicked.connect(self.start_symbolization)
-        self.export_button.clicked.connect(self.export_result)
+        self.archive_path_edit.textChanged.connect(self.update_buttons)
+        self.crash_path_edit.textChanged.connect(self.update_buttons)
+        self.json_path_edit.textChanged.connect(self.update_buttons)
+        
+        # 添加单选按钮的信号连接
+        self.crash_radio.toggled.connect(self.on_parse_type_changed)
+        self.json_radio.toggled.connect(self.on_parse_type_changed)
         
         # 设置线程信号连接
         self.thread.progress_signal.connect(self.update_progress)
         self.thread.result_signal.connect(self.show_result)
         self.thread.finished_signal.connect(self.symbolization_finished)
         
+    def on_parse_type_changed(self):
+        """解析方式改变时的处理"""
+        # 清空文件选择
+        self.crash_path = None
+        self.json_path = None
+        self.crash_path_edit.setText("")
+        self.json_path_edit.setText("")
+        self.original_crash_text.clear()
+        
+        # 更新界面状态
+        if self.crash_radio.isChecked():
+            self.crash_path_edit.setEnabled(True)
+            self.json_path_edit.setEnabled(False)
+        else:
+            self.crash_path_edit.setEnabled(False)
+            self.json_path_edit.setEnabled(True)
+            
+        self.update_buttons()
+        
+    def update_buttons(self):
+        """更新按钮状态"""
+        has_archive = bool(self.archive_path)
+        has_crash = bool(self.crash_path)
+        has_json = bool(self.json_path)
+        
+        # 根据选择的解析方式启用相应的按钮
+        if self.crash_radio.isChecked():
+            self.symbolize_button.setEnabled(has_archive and has_crash)
+        else:
+            self.symbolize_button.setEnabled(has_archive and has_json)
+            
     def select_archive(self):
         """选择Archive文件"""
         file_path, _ = QFileDialog.getOpenFileName(
@@ -197,12 +272,18 @@ class MainWindow(QMainWindow):
         if file_path:
             self.archive_path = file_path
             self.archive_path_edit.setText(file_path)
-            self.update_start_button()
+            self.update_buttons()
             
     def select_crash(self):
         """选择Crash文件"""
+        if not self.crash_radio.isChecked():
+            return
+            
         file_path, _ = QFileDialog.getOpenFileName(
-            self, "选择Crash文件", "", "Crash文件 (*.crash *.txt);;所有文件 (*)"
+            self,
+            "选择Crash文件",
+            "",
+            "Crash文件 (*.crash *.txt);;所有文件 (*)"
         )
         if file_path:
             try:
@@ -219,27 +300,63 @@ class MainWindow(QMainWindow):
                         self.original_crash_text.setText(crash_content)
                         self.tab_widget.setCurrentIndex(0)
                 except Exception as e:
-                    QMessageBox.warning(self, "警告", f"读取Crash文件失败: {str(e)}")
+                    QMessageBox.warning(self, "警告", f"读取文件失败: {str(e)}")
                     return
             except Exception as e:
-                QMessageBox.warning(self, "警告", f"读取Crash文件失败: {str(e)}")
+                QMessageBox.warning(self, "警告", f"读取文件失败: {str(e)}")
                 return
                 
             self.crash_path = file_path
             self.crash_path_edit.setText(file_path)
-            self.update_start_button()
+            self.update_buttons()
             
-    def update_start_button(self):
-        """检查是否已选择所需文件"""
-        if self.archive_path and self.crash_path:
-            self.symbolize_button.setEnabled(True)
-        else:
-            self.symbolize_button.setEnabled(False)
+    def select_json(self):
+        """选择JSON文件"""
+        if not self.json_radio.isChecked():
+            return
+            
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "选择JSON文件",
+            "",
+            "JSON文件 (*.json);;所有文件 (*)"
+        )
+        if file_path:
+            try:
+                # 读取并显示原始内容
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    json_content = f.read()
+                    self.original_crash_text.setText(json_content)
+                    self.tab_widget.setCurrentIndex(0)
+            except UnicodeDecodeError:
+                try:
+                    with open(file_path, 'r', encoding='latin-1') as f:
+                        json_content = f.read()
+                        self.original_crash_text.setText(json_content)
+                        self.tab_widget.setCurrentIndex(0)
+                except Exception as e:
+                    QMessageBox.warning(self, "警告", f"读取文件失败: {str(e)}")
+                    return
+            except Exception as e:
+                QMessageBox.warning(self, "警告", f"读取文件失败: {str(e)}")
+                return
+                
+            self.json_path = file_path
+            self.json_path_edit.setText(file_path)
+            self.update_buttons()
             
     def start_symbolization(self):
         """开始符号化过程"""
-        if not self.archive_path or not self.crash_path:
-            QMessageBox.warning(self, "警告", "请先选择Archive文件和Crash文件")
+        if not self.archive_path:
+            QMessageBox.warning(self, "警告", "请先选择Archive文件")
+            return
+            
+        if self.crash_radio.isChecked() and not self.crash_path:
+            QMessageBox.warning(self, "警告", "请选择Crash文件")
+            return
+            
+        if self.json_radio.isChecked() and not self.json_path:
+            QMessageBox.warning(self, "警告", "请选择JSON文件")
             return
             
         # 清空显示区域
@@ -249,12 +366,15 @@ class MainWindow(QMainWindow):
         # 禁用按钮
         self.symbolize_button.setEnabled(False)
         self.export_button.setEnabled(False)
-        self.statusBar().showMessage("正在符号化...")
+        self.statusBar().showMessage("正在处理...")
         
-        # 创建并启动符号化线程
-        self.thread.set_paths(self.archive_path, self.crash_path)
+        # 根据选择的解析方式处理
+        if self.json_radio.isChecked():
+            self.thread.set_paths(self.archive_path, self.json_path, is_json=True)
+        else:
+            self.thread.set_paths(self.archive_path, self.crash_path, is_json=False)
         self.thread.start()
-        
+            
     def update_progress(self, message):
         """更新进度信息"""
         self.process_text.append(message)
