@@ -4,7 +4,7 @@ APP = ['main.py']
 DATA_FILES = []
 OPTIONS = {
     'argv_emulation': True,
-    'packages': ['PyQt6'],
+    'packages': ['PyQt6', 'pkg_resources', 'jaraco.text'],
     'iconfile': 'app.icns',
     'plist': {
         'CFBundleName': 'iOS崩溃日志符号化工具',
