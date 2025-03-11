@@ -30,14 +30,6 @@
 
 ## 安装方法
 
-### 方法一：直接下载
-
-1. 从[Releases](https://github.com/yourusername/ios-crash-symbolication-tool/releases)页面下载最新版本的应用
-2. 将下载的`.app`文件拖到Applications文件夹中
-3. 双击应用图标启动
-
-### 方法二：从源码构建
-
 1. 克隆仓库
    ```bash
    git clone https://github.com/yourusername/ios-crash-symbolication-tool.git
@@ -163,8 +155,6 @@ A: 您可以通过以下方式获取dSYM文件：
 如有任何问题或建议，请通过以下方式联系我们：
 
 - 提交GitHub Issue
-- 发送邮件至：your.email@example.com
-- 访问我们的网站：[www.example.com](http://www.example.com)
 
 ---
 
